@@ -1,6 +1,6 @@
 <?php
 
-namespace Sedehi\ArtistConsole;
+namespace Sedehi\Artist\Console;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -32,23 +32,8 @@ class ArtistConsoleServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/artistconsole.php', 'artistconsole');
-
-        // Register the service the package provides.
-        $this->app->singleton('artistconsole', function ($app) {
-            return new ArtistConsole;
-        });
     }
 
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['artistconsole'];
-    }
-    
     /**
      * Console-specific booting.
      *
