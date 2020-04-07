@@ -31,6 +31,7 @@ class ArtistConsoleServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(CommandServiceProvider::class);
         $this->mergeConfigFrom(__DIR__.'/../config/artistconsole.php', 'artistconsole');
     }
 

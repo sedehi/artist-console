@@ -26,22 +26,19 @@
     },
     "autoload": {
         "psr-4": {
-            "Sedehi\\ArtistConsole\\": "src/"
+            "Sedehi\\Artist\\Console\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Sedehi\\ArtistConsole\\Tests\\": "tests"
+            "Sedehi\\Artist\\Console\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Sedehi\\ArtistConsole\\ArtistConsoleServiceProvider"
-            ],
-            "aliases": {
-                "ArtistConsole": "Sedehi\\ArtistConsole\\Facades\\ArtistConsole"
-            }
+                "Sedehi\\Artist\\Console\\ArtistConsoleServiceProvider"
+            ]
         }
     }
 }
