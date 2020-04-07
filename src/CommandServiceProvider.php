@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Sedehi\Artist\Console;
-
 
 use Illuminate\Foundation\Providers\ArtisanServiceProvider;
 use Sedehi\Artist\Console\Command\SectionModel;
