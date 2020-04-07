@@ -1,7 +1,7 @@
 {
-    "name": "sedehi/artistconsole",
+    "name": "sedehi/artist-console",
     "description": ":package_description",
-    "license": "license",
+    "license": "MIT",
     "authors": [
         {
             "name": "Navid Sedehi",
@@ -9,8 +9,8 @@
             "homepage": "https://sedehi.ir"
         }
     ],
-    "homepage": "https://github.com/sedehi/artistconsole",
-    "keywords": ["Laravel", "ArtistConsole"],
+    "homepage": "https://github.com/sedehi/artist-console",
+    "keywords": ["Laravel", "ArtistConsole","Artist"],
     "require": {
         "illuminate/support": "~5|~6|~7"
     },
