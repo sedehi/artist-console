@@ -2,10 +2,9 @@
 
 namespace Sedehi\Artist\Console\Tests\Command;
 
- use Sedehi\Artist\Console\ArtistConsoleServiceProvider;
- use Sedehi\Artist\Console\Tests\SectionTestCase;
+use Sedehi\Artist\Console\Tests\SectionTestCase;
 
-class MakeFactoryTest extends  SectionTestCase
+class MakeFactoryTest extends SectionTestCase
 {
     /**
      * A basic test example.
@@ -14,14 +13,13 @@ class MakeFactoryTest extends  SectionTestCase
      */
     public function testSectionFactory()
     {
-        $section = 'Test';
         $name = 'TestFactory';
-        $path = app_path('Http/Controllers/'.$section."/database/factories/{$name}.php");
+        $path = app_path('Http/Controllers/'.$this->sectionName."/database/factories/{$name}.php");
 
         $this->artisan('make:factory', [
             'name'      => $name,
-            '--section' => $section
-        ]);
+            '--section' => $this->sectionName
+        ])->expectsOutput('Factory created successfully.');
 
         $this->assertFileExists($path);
     }
