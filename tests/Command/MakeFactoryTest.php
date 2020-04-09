@@ -2,7 +2,6 @@
 
 namespace Sedehi\Artist\Console\Tests\Command;
 
-use Illuminate\Support\Facades\Artisan;
 use Sedehi\Artist\Console\Tests\SectionTestCase;
 
 class MakeFactoryTest extends  SectionTestCase
