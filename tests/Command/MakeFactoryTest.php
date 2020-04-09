@@ -2,7 +2,8 @@
 
 namespace Sedehi\Artist\Console\Tests\Command;
 
-use Sedehi\Artist\Console\Tests\SectionTestCase;
+ use Sedehi\Artist\Console\ArtistConsoleServiceProvider;
+ use Sedehi\Artist\Console\Tests\SectionTestCase;
 
 class MakeFactoryTest extends  SectionTestCase
 {
