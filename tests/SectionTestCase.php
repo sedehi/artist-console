@@ -11,6 +11,5 @@ class SectionTestCase extends TestCase
     {
         parent::setUp();
         $this->app->register(ArtistConsoleServiceProvider::class);
-
     }
 }
