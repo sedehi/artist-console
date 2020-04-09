@@ -18,7 +18,7 @@ class MakeFactoryTest extends  SectionTestCase
         $name = 'TestFactory';
         $path = app_path('Http/Controllers/'.$section."/database/factories/{$name}.php");
 
-        Artisan::call('make:factory', [
+        $this->artisan('make:factory', [
             'name'      => $name,
             '--section' => $section
         ]);
