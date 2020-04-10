@@ -2,10 +2,10 @@
 
 namespace Sedehi\Artist\Console;
 
+use Illuminate\Foundation\Providers\ArtisanServiceProvider;
+use Sedehi\Artist\Console\Command\MakeFactory;
 use Sedehi\Artist\Console\Command\MakeMigration;
 use Sedehi\Artist\Console\Command\MakeModel;
-use Sedehi\Artist\Console\Command\MakeFactory;
-use Illuminate\Foundation\Providers\ArtisanServiceProvider;
 
 class CommandServiceProvider extends ArtisanServiceProvider
 {

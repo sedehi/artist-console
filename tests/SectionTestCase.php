@@ -2,8 +2,8 @@
 
 namespace Sedehi\Artist\Console\Tests;
 
-use Orchestra\Testbench\TestCase;
 use Illuminate\Support\Facades\File;
+use Orchestra\Testbench\TestCase;
 use Sedehi\Artist\Console\ArtistConsoleServiceProvider;
 
 abstract class SectionTestCase extends TestCase

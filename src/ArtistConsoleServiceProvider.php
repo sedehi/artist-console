@@ -35,7 +35,7 @@ class ArtistConsoleServiceProvider extends ServiceProvider
         if (class_exists(\Illuminate\Database\MigrationServiceProvider::class)) {
             $this->app->register(MigrationServiceProvider::class);
         }
-      //  $this->mergeConfigFrom(__DIR__.'/../config/artistconsole.php', 'artistconsole');
+        //  $this->mergeConfigFrom(__DIR__.'/../config/artistconsole.php', 'artistconsole');
     }
 
     /**

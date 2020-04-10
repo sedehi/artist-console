@@ -10,12 +10,12 @@ use Sedehi\Artist\Console\Traits\Interactive;
 class MakeMigration extends MigrateMakeCommand implements SectionName
 {
     use Interactive;
+
     public function __construct($creator, $composer)
     {
         $this->signature .= '{--section= : The name of the section}';
         $this->signature .= '{--in=false : Interactive mode}';
         parent::__construct($creator, $composer);
-
     }
 
     protected function getMigrationPath()
@@ -24,10 +24,11 @@ class MakeMigration extends MigrateMakeCommand implements SectionName
         if ($section !== '') {
             $path = $this->laravel->basePath().'/app/Http/Controllers/'.$section.'/database/migrations';
             $this->makeDirectory($path);
+
             return $path;
         }
         if (($targetPath = $this->input->getOption('path')) !== null) {
-            return !$this->usingRealPath() ? $this->laravel->basePath().'/'.$targetPath : $targetPath;
+            return ! $this->usingRealPath() ? $this->laravel->basePath().'/'.$targetPath : $targetPath;
         }
 
         return parent::getMigrationPath();
@@ -35,7 +36,7 @@ class MakeMigration extends MigrateMakeCommand implements SectionName
 
     protected function makeDirectory($path)
     {
-        if (!app('files')->isDirectory($path)) {
+        if (! app('files')->isDirectory($path)) {
             app('files')->makeDirectory($path, 0777, true, true);
         }
 
