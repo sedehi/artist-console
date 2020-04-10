@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 use Sedehi\Artist\Console\Traits\CommandOptions;
 use Illuminate\Database\Console\Factories\FactoryMakeCommand;
 
-class SectionFactory extends FactoryMakeCommand
+class MakeFactory extends FactoryMakeCommand
 {
     use CommandOptions;
 

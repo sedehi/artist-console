@@ -6,7 +6,7 @@ use Illuminate\Foundation\Console\ModelMakeCommand;
 use Illuminate\Support\Str;
 use Sedehi\Artist\Console\Traits\CommandOptions;
 
-class SectionModel extends ModelMakeCommand
+class MakeModel extends ModelMakeCommand
 {
     use CommandOptions;
 
