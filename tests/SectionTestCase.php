@@ -9,6 +9,8 @@ use Sedehi\Artist\Console\ArtistConsoleServiceProvider;
 abstract class SectionTestCase extends TestCase
 {
     public $sectionName = 'TestSection';
+    public $factoryName = 'TestFactory';
+    public $modelName = 'TestModel';
 
     public function setUp(): void
     {

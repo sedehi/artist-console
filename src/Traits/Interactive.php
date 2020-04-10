@@ -1,11 +1,10 @@
 <?php
 
-
 namespace Sedehi\Artist\Console\Traits;
-
 
 use Exception;
 use ReflectionClass;
+use Sedehi\Artist\Console\Questions\ModelName;
 use Sedehi\Artist\Console\Questions\SectionName;
 
 trait Interactive
@@ -29,11 +28,13 @@ trait Interactive
         if(!$in){
             return false;
         }
-
-
         if($this->implements(SectionName::class)) {
-            $sectionName = $this->ask('Section name?');
+            $sectionName = $this->ask('Enter section name: [optional]');
             $this->input->setOption('section',$sectionName);
+        }
+        if($this->implements(ModelName::class)) {
+            $modelName = $this->ask('Enter model name: [optional]');
+            $this->input->setOption('model',$modelName);
         }
     }
 
