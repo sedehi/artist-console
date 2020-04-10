@@ -7,11 +7,10 @@ use Sedehi\Artist\Console\Tests\SectionTestCase;
 class MakeFactoryTest extends SectionTestCase
 {
     /**
-     * A basic test example.
-     *
      * @return void
+     * @test
      */
-    public function testSectionFactory()
+    public function make_factory_with_section_option()
     {
         $name = 'TestFactory';
         $path = app_path('Http/Controllers/'.$this->sectionName."/database/factories/{$name}.php");
