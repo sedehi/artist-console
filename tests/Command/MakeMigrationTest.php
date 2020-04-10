@@ -15,9 +15,9 @@ class MakeMigrationTest extends SectionTestCase
         $name = 'create_test_table';
         $this->artisan('make:migration', [
             'name'      => $name,
-            '--section' => $this->sectionName
+            '--section' => $this->sectionName,
         ]);
-        $migration = glob(app_path('Http/Controllers/'.$this->sectionName."/database/migrations/*_create_test_table.php"));
-        $this->assertCount(1,$migration);
+        $migration = glob(app_path('Http/Controllers/'.$this->sectionName.'/database/migrations/*_create_test_table.php'));
+        $this->assertCount(1, $migration);
     }
 }
