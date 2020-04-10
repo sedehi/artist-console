@@ -14,9 +14,9 @@ class InteractiveTest extends SectionTestCase
     {
         $this->artisan('make:factory', [
             'name'  => $this->factoryName,
-            '--in'  => true
-        ])->expectsQuestion('Enter section name: [optional]',$this->sectionName)
-            ->expectsQuestion('Enter model name: [optional]',$this->modelName)
+            '--in'  => true,
+        ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
+            ->expectsQuestion('Enter model name: [optional]', $this->modelName)
             ->assertExitCode(0);
     }
 }
