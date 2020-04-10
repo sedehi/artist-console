@@ -32,7 +32,10 @@ class ArtistConsoleServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(CommandServiceProvider::class);
-        $this->mergeConfigFrom(__DIR__.'/../config/artistconsole.php', 'artistconsole');
+        if (class_exists(\Illuminate\Database\MigrationServiceProvider::class)) {
+            $this->app->register(MigrationServiceProvider::class);
+        }
+      //  $this->mergeConfigFrom(__DIR__.'/../config/artistconsole.php', 'artistconsole');
     }
 
     /**
@@ -43,9 +46,9 @@ class ArtistConsoleServiceProvider extends ServiceProvider
     protected function bootForConsole()
     {
         // Publishing the configuration file.
-        $this->publishes([
-            __DIR__.'/../config/artistconsole.php' => config_path('artistconsole.php'),
-        ], 'artistconsole.config');
+//        $this->publishes([
+//            __DIR__.'/../config/artistconsole.php' => config_path('artistconsole.php'),
+//        ], 'artistconsole.config');
 
         // Publishing the views.
         /*$this->publishes([
