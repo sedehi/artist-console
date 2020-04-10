@@ -18,7 +18,7 @@ class MakeFactoryTest extends SectionTestCase
         $this->artisan('make:factory', [
             'name'      => $name,
             '--section' => $this->sectionName
-        ])->expectsOutput('Factory created successfully.');
+        ]);
 
         $this->assertFileExists($path);
     }
