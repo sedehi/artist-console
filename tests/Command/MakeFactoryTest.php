@@ -12,11 +12,10 @@ class MakeFactoryTest extends SectionTestCase
      */
     public function make_factory_with_section_option()
     {
-        $name = 'TestFactory';
-        $path = app_path('Http/Controllers/'.$this->sectionName."/database/factories/{$name}.php");
+        $path = app_path('Http/Controllers/'.$this->sectionName."/database/factories/{$this->factoryName}.php");
 
         $this->artisan('make:factory', [
-            'name'      => $name,
+            'name'      => $this->factoryName,
             '--section' => $this->sectionName,
         ]);
 

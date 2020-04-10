@@ -4,11 +4,12 @@ namespace Sedehi\Artist\Console\Command;
 
 use Illuminate\Database\Console\Factories\FactoryMakeCommand;
 use Illuminate\Support\Str;
+use Sedehi\Artist\Console\Questions\ModelName;
 use Sedehi\Artist\Console\Questions\SectionName;
 use Sedehi\Artist\Console\Traits\CommandOptions;
 use Sedehi\Artist\Console\Traits\Interactive;
 
-class MakeFactory extends FactoryMakeCommand implements SectionName
+class MakeFactory extends FactoryMakeCommand implements SectionName, ModelName
 {
     use CommandOptions,Interactive;
 
