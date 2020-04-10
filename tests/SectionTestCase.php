@@ -6,7 +6,7 @@ use Orchestra\Testbench\TestCase;
 use Illuminate\Support\Facades\File;
 use Sedehi\Artist\Console\ArtistConsoleServiceProvider;
 
-class SectionTestCase extends TestCase
+abstract class SectionTestCase extends TestCase
 {
     public $sectionName = 'TestSection';
 
