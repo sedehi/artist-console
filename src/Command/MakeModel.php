@@ -4,18 +4,20 @@ namespace Sedehi\Artist\Console\Command;
 
 use Illuminate\Foundation\Console\ModelMakeCommand;
 use Illuminate\Support\Str;
+use Sedehi\Artist\Console\Questions\SectionName;
 use Sedehi\Artist\Console\Traits\CommandOptions;
+use Sedehi\Artist\Console\Traits\Interactive;
 
-class MakeModel extends ModelMakeCommand
+class MakeModel extends ModelMakeCommand implements SectionName
 {
-    use CommandOptions;
+    use CommandOptions,Interactive;
+
 
     protected function getDefaultNamespace($rootNamespace)
     {
         if ($this->option('section') !== null) {
             return $rootNamespace.'\Http\Controllers\\'.Str::studly($this->option('section')).'\\Models';
         }
-
         return $rootNamespace;
     }
 

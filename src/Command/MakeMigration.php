@@ -4,13 +4,18 @@ namespace Sedehi\Artist\Console\Command;
 
 use Illuminate\Database\Console\Migrations\MigrateMakeCommand;
 use Illuminate\Support\Str;
+use Sedehi\Artist\Console\Questions\SectionName;
+use Sedehi\Artist\Console\Traits\Interactive;
 
-class MakeMigration extends MigrateMakeCommand
+class MakeMigration extends MigrateMakeCommand implements SectionName
 {
+    use Interactive;
     public function __construct($creator, $composer)
     {
         $this->signature .= '{--section= : The name of the section}';
+        $this->signature .= '{--in=false : Interactive mode}';
         parent::__construct($creator, $composer);
+
     }
 
     protected function getMigrationPath()
