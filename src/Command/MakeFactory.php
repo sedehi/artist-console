@@ -9,7 +9,7 @@ use Sedehi\Artist\Console\Questions\SectionName;
 use Sedehi\Artist\Console\Traits\CommandOptions;
 use Sedehi\Artist\Console\Traits\Interactive;
 
-class MakeFactory extends FactoryMakeCommand implements SectionName,ModelName
+class MakeFactory extends FactoryMakeCommand implements SectionName, ModelName
 {
     use CommandOptions,Interactive;
 

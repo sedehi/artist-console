@@ -27,14 +27,13 @@ trait Interactive
         if (! $in) {
             return false;
         }
-        if($this->implements(SectionName::class)) {
+        if ($this->implements(SectionName::class)) {
             $sectionName = $this->ask('Enter section name: [optional]');
-            $this->input->setOption('section',$sectionName);
-
+            $this->input->setOption('section', $sectionName);
         }
-        if($this->implements(ModelName::class)) {
+        if ($this->implements(ModelName::class)) {
             $modelName = $this->ask('Enter model name: [optional]');
-            $this->input->setOption('model',$modelName);
+            $this->input->setOption('model', $modelName);
         }
     }
 
