@@ -9,7 +9,6 @@ use Sedehi\Artist\Console\Questions\SectionName;
 
 trait Interactive
 {
-
     public function handle()
     {
         $this->interactive();
@@ -19,18 +18,19 @@ trait Interactive
     protected function interactive()
     {
         $in = $this->option('in');
-        if($in === "false"){
+        if ($in === 'false') {
             $in = false;
         }
-        if($in === null){
+        if ($in === null) {
             $in = true;
         }
-        if(!$in){
+        if (! $in) {
             return false;
         }
         if($this->implements(SectionName::class)) {
             $sectionName = $this->ask('Enter section name: [optional]');
             $this->input->setOption('section',$sectionName);
+
         }
         if($this->implements(ModelName::class)) {
             $modelName = $this->ask('Enter model name: [optional]');

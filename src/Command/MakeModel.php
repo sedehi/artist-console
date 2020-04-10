@@ -12,12 +12,12 @@ class MakeModel extends ModelMakeCommand implements SectionName
 {
     use CommandOptions,Interactive;
 
-
     protected function getDefaultNamespace($rootNamespace)
     {
         if ($this->option('section') !== null) {
             return $rootNamespace.'\Http\Controllers\\'.Str::studly($this->option('section')).'\\Models';
         }
+
         return $rootNamespace;
     }
 
