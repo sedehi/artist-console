@@ -32,7 +32,7 @@ class InteractiveTest extends SectionTestCase
         ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
           ->assertExitCode(0);
     }
-  
+
     public function test_listener_command_interactive()
     {
         $this->artisan('make:listener', [
