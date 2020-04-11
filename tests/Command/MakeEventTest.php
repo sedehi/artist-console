@@ -21,4 +21,17 @@ class MakeEventTest extends SectionTestCase
 
         $this->assertFileExists($path);
     }
+
+    /**
+     * @return void
+     * @test
+     */
+    public function test_event_command_interactive()
+    {
+        $this->artisan('make:event', [
+            'name'  => $this->eventName,
+            '--in'  => true,
+        ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
+            ->assertExitCode(0);
+    }
 }
