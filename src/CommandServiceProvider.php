@@ -39,9 +39,9 @@ class CommandServiceProvider extends ArtisanServiceProvider
     {
         $this->app->singleton('command.event.make', function ($app) {
             return new MakeEvent($app['files']);
-          
+        });
     }
-                              
+
     protected function registerListenerMakeCommand()
     {
         $this->app->singleton('command.listener.make', function ($app) {
