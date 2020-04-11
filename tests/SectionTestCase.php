@@ -11,6 +11,7 @@ abstract class SectionTestCase extends TestCase
     public $sectionName = 'TestSection';
     public $factoryName = 'TestFactory';
     public $eventName = 'TestEvent';
+    public $listenerName = 'TestListener';
     public $modelName = 'TestModel';
 
     public function setUp(): void
