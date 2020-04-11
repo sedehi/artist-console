@@ -4,6 +4,7 @@ namespace Sedehi\Artist\Console\Traits;
 
 use Exception;
 use ReflectionClass;
+use Sedehi\Artist\Console\Questions\EventlName;
 use Sedehi\Artist\Console\Questions\ModelName;
 use Sedehi\Artist\Console\Questions\SectionName;
 
@@ -34,6 +35,10 @@ trait Interactive
         if ($this->implements(ModelName::class)) {
             $modelName = $this->ask('Enter model name: [optional]');
             $this->input->setOption('model', $modelName);
+        }
+        if ($this->implements(EventlName::class)) {
+            $eventName = $this->ask('Enter event name: [optional]');
+            $this->input->setOption('event', $eventName);
         }
     }
 

@@ -4,6 +4,7 @@ namespace Sedehi\Artist\Console;
 
 use Illuminate\Foundation\Providers\ArtisanServiceProvider;
 use Sedehi\Artist\Console\Command\MakeFactory;
+use Sedehi\Artist\Console\Command\MakeListener;
 use Sedehi\Artist\Console\Command\MakeMigration;
 use Sedehi\Artist\Console\Command\MakeModel;
 
@@ -30,6 +31,13 @@ class CommandServiceProvider extends ArtisanServiceProvider
             $composer = $app['composer'];
 
             return new MakeMigration($creator, $composer);
+        });
+    }
+
+    protected function registerListenerMakeCommand()
+    {
+        $this->app->singleton('command.listener.make', function ($app) {
+            return new MakeListener($app['files']);
         });
     }
 }
