@@ -24,6 +24,15 @@ class InteractiveTest extends SectionTestCase
      * @return void
      * @test
      */
+    public function test_event_command_interactive()
+    {
+        $this->artisan('make:event', [
+            'name'  => $this->eventName,
+            '--in'  => true,
+        ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
+          ->assertExitCode(0);
+    }
+
     public function test_listener_command_interactive()
     {
         $this->artisan('make:listener', [
