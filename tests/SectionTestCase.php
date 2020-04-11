@@ -2,14 +2,15 @@
 
 namespace Sedehi\Artist\Console\Tests;
 
-use Illuminate\Support\Facades\File;
 use Orchestra\Testbench\TestCase;
+use Illuminate\Support\Facades\File;
 use Sedehi\Artist\Console\ArtistConsoleServiceProvider;
 
 abstract class SectionTestCase extends TestCase
 {
     public $sectionName = 'TestSection';
     public $factoryName = 'TestFactory';
+    public $eventName = 'TestEvent';
     public $modelName = 'TestModel';
 
     public function setUp(): void

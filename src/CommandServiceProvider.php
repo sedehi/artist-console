@@ -3,6 +3,7 @@
 namespace Sedehi\Artist\Console;
 
 use Illuminate\Foundation\Providers\ArtisanServiceProvider;
+use Sedehi\Artist\Console\Command\MakeEvent;
 use Sedehi\Artist\Console\Command\MakeFactory;
 use Sedehi\Artist\Console\Command\MakeMigration;
 use Sedehi\Artist\Console\Command\MakeModel;
@@ -30,6 +31,13 @@ class CommandServiceProvider extends ArtisanServiceProvider
             $composer = $app['composer'];
 
             return new MakeMigration($creator, $composer);
+        });
+    }
+
+    protected function registerEventMakeCommand()
+    {
+        $this->app->singleton('command.event.make', function ($app) {
+            return new MakeEvent($app['files']);
         });
     }
 }

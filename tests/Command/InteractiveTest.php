@@ -19,4 +19,17 @@ class InteractiveTest extends SectionTestCase
             ->expectsQuestion('Enter model name: [optional]', $this->modelName)
             ->assertExitCode(0);
     }
+
+    /**
+     * @return void
+     * @test
+     */
+    public function test_event_command_interactive()
+    {
+        $this->artisan('make:event', [
+            'name'  => $this->eventName,
+            '--in'  => true,
+        ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
+            ->assertExitCode(0);
+    }
 }
