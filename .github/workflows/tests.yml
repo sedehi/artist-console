@@ -16,9 +16,9 @@ jobs:
         exclude:
           - laravel: 5.7.*
             php: 7.4
-          - laravel: 6
+          - laravel: ^6.0
             php: 7.1
-          - laravel: 7
+          - laravel: ^7.0
             php: 7.1
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }}
