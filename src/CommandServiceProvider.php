@@ -3,6 +3,7 @@
 namespace Sedehi\Artist\Console;
 
 use Illuminate\Foundation\Providers\ArtisanServiceProvider;
+use Sedehi\Artist\Console\Command\MakeChannel;
 use Sedehi\Artist\Console\Command\MakeEvent;
 use Sedehi\Artist\Console\Command\MakeFactory;
 use Sedehi\Artist\Console\Command\MakeListener;
@@ -46,6 +47,13 @@ class CommandServiceProvider extends ArtisanServiceProvider
     {
         $this->app->singleton('command.listener.make', function ($app) {
             return new MakeListener($app['files']);
+        });
+    }
+
+    protected function registerChannelMakeCommand()
+    {
+        $this->app->singleton('command.channel.make', function ($app) {
+            return new MakeChannel($app['files']);
         });
     }
 }

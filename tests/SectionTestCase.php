@@ -13,6 +13,7 @@ abstract class SectionTestCase extends TestCase
     public $eventName = 'TestEvent';
     public $listenerName = 'TestListener';
     public $modelName = 'TestModel';
+    public $channelName = 'TestChannel';
 
     public function setUp(): void
     {
