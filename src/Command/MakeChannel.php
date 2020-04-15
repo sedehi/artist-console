@@ -2,11 +2,11 @@
 
 namespace Sedehi\Artist\Console\Command;
 
+use Illuminate\Foundation\Console\ChannelMakeCommand;
 use Illuminate\Support\Str;
-use Sedehi\Artist\Console\Traits\Interactive;
 use Sedehi\Artist\Console\Questions\SectionName;
 use Sedehi\Artist\Console\Traits\CommandOptions;
-use Illuminate\Foundation\Console\ChannelMakeCommand;
+use Sedehi\Artist\Console\Traits\Interactive;
 
 class MakeChannel extends ChannelMakeCommand implements SectionName
 {
