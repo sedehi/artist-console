@@ -13,13 +13,13 @@ jobs:
       matrix:
         php: [7.1,7.2, 7.3,7.4]
         laravel: [5.7.*,5.8.*,^6.0, ^7.0]
-      exclude:
-        - laravel: 5.7.*
-          php: 7.4
-        - laravel: 6
-          php: 7.1
-        - laravel: 7
-          php: 7.1
+        exclude:
+          - laravel: 5.7.*
+            php: 7.4
+          - laravel: 6
+            php: 7.1
+          - laravel: 7
+            php: 7.1
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }}
 
