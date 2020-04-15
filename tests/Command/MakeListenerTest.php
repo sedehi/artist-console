@@ -12,10 +12,10 @@ class MakeListenerTest extends SectionTestCase
      */
     public function make_listener_with_section_option()
     {
-        $path = app_path('Http/Controllers/'.$this->sectionName."/Listeners/{$this->listenerName}.php");
+        $path = app_path('Http/Controllers/'.$this->sectionName."/Listeners/{$this->sampleName}.php");
 
         $this->artisan('make:listener', [
-            'name'      => $this->listenerName,
+            'name'      => $this->sampleName,
             '--section' => $this->sectionName,
         ]);
 
@@ -29,10 +29,10 @@ class MakeListenerTest extends SectionTestCase
     public function test_listener_command_interactive()
     {
         $this->artisan('make:listener', [
-            'name'  => $this->listenerName,
+            'name'  => $this->sampleName,
             '--in'  => true,
         ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
-            ->expectsQuestion('Enter event name: [optional]', $this->eventName)
+            ->expectsQuestion('Enter event name: [optional]', $this->sampleName)
             ->assertExitCode(0);
     }
 }

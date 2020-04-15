@@ -12,10 +12,10 @@ class MakeEventTest extends SectionTestCase
      */
     public function make_event_with_section_option()
     {
-        $path = app_path('Http/Controllers/'.$this->sectionName."/Events/{$this->eventName}.php");
+        $path = app_path('Http/Controllers/'.$this->sectionName."/Events/{$this->sampleName}.php");
 
         $this->artisan('make:event', [
-            'name'      => $this->eventName,
+            'name'      => $this->sampleName,
             '--section' => $this->sectionName,
         ]);
 
@@ -29,7 +29,7 @@ class MakeEventTest extends SectionTestCase
     public function test_event_command_interactive()
     {
         $this->artisan('make:event', [
-            'name'  => $this->eventName,
+            'name'  => $this->sampleName,
             '--in'  => true,
         ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
             ->assertExitCode(0);

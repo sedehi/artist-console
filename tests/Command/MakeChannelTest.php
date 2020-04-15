@@ -12,10 +12,10 @@ class MakeChannelTest extends SectionTestCase
      */
     public function make_channel_with_section_option()
     {
-        $path = app_path('Http/Controllers/'.$this->sectionName."/Channels/{$this->channelName}.php");
+        $path = app_path('Http/Controllers/'.$this->sectionName."/Channels/{$this->sampleName}.php");
 
         $this->artisan('make:channel', [
-            'name'      => $this->channelName,
+            'name'      => $this->sampleName,
             '--section' => $this->sectionName,
         ]);
 
@@ -29,7 +29,7 @@ class MakeChannelTest extends SectionTestCase
     public function test_channel_command_interactive()
     {
         $this->artisan('make:channel', [
-            'name'  => $this->channelName,
+            'name'  => $this->sampleName,
             '--in'  => true,
         ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
             ->assertExitCode(0);
