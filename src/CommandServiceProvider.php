@@ -14,6 +14,7 @@ use Sedehi\Artist\Console\Command\MakeMigration;
 use Sedehi\Artist\Console\Command\MakeModel;
 use Sedehi\Artist\Console\Command\MakeNotification;
 use Sedehi\Artist\Console\Command\MakeObserver;
+use Sedehi\Artist\Console\Command\MakePolicy;
 
 class CommandServiceProvider extends ArtisanServiceProvider
 {
@@ -94,6 +95,13 @@ class CommandServiceProvider extends ArtisanServiceProvider
     {
         $this->app->singleton('command.observer.make', function ($app) {
             return new MakeObserver($app['files']);
+        });
+    }
+
+    protected function registerPolicyMakeCommand()
+    {
+        $this->app->singleton('command.policy.make', function ($app) {
+            return new MakePolicy($app['files']);
         });
     }
 }
