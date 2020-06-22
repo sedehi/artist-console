@@ -12,6 +12,7 @@ use Sedehi\Artist\Console\Command\MakeListener;
 use Sedehi\Artist\Console\Command\MakeMail;
 use Sedehi\Artist\Console\Command\MakeMigration;
 use Sedehi\Artist\Console\Command\MakeModel;
+use Sedehi\Artist\Console\Command\MakeNotification;
 
 class CommandServiceProvider extends ArtisanServiceProvider
 {
@@ -78,6 +79,13 @@ class CommandServiceProvider extends ArtisanServiceProvider
     {
         $this->app->singleton('command.mail.make', function ($app) {
             return new MakeMail($app['files']);
+        });
+    }
+
+    protected function registerNotificationMakeCommand()
+    {
+        $this->app->singleton('command.notification.make', function ($app) {
+            return new MakeNotification($app['files']);
         });
     }
 }
