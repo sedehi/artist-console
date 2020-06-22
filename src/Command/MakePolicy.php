@@ -19,6 +19,7 @@ class MakePolicy extends PolicyMakeCommand implements SectionName, ModelName
         if ($this->option('section') !== null) {
             $namespace .= '\Controllers\\'.Str::studly($this->option('section'));
         }
+
         return $namespace.'\Policies';
     }
 }
