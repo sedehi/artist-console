@@ -9,7 +9,7 @@ use Sedehi\Artist\Console\Questions\SectionName;
 use Sedehi\Artist\Console\Traits\CommandOptions;
 use Sedehi\Artist\Console\Traits\Interactive;
 
-class MakeObserver extends ObserverMakeCommand implements SectionName,ModelName
+class MakeObserver extends ObserverMakeCommand implements SectionName, ModelName
 {
     use CommandOptions,Interactive;
 
@@ -19,6 +19,7 @@ class MakeObserver extends ObserverMakeCommand implements SectionName,ModelName
         if ($this->option('section') !== null) {
             $namespace .= '\Controllers\\'.Str::studly($this->option('section'));
         }
+
         return $namespace.'\Observers';
     }
 }
