@@ -7,6 +7,7 @@ use Sedehi\Artist\Console\Command\MakeChannel;
 use Sedehi\Artist\Console\Command\MakeCommand;
 use Sedehi\Artist\Console\Command\MakeEvent;
 use Sedehi\Artist\Console\Command\MakeFactory;
+use Sedehi\Artist\Console\Command\MakeJob;
 use Sedehi\Artist\Console\Command\MakeListener;
 use Sedehi\Artist\Console\Command\MakeMigration;
 use Sedehi\Artist\Console\Command\MakeModel;
@@ -62,6 +63,13 @@ class CommandServiceProvider extends ArtisanServiceProvider
     {
         $this->app->singleton('command.console.make', function ($app) {
             return new MakeCommand($app['files']);
+        });
+    }
+
+    protected function registerJobMakeCommand()
+    {
+        $this->app->singleton('command.job.make', function ($app) {
+            return new MakeJob($app['files']);
         });
     }
 }
