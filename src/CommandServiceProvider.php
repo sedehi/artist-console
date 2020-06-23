@@ -6,6 +6,7 @@ use Illuminate\Foundation\Providers\ArtisanServiceProvider;
 use Sedehi\Artist\Console\Command\MakeChannel;
 use Sedehi\Artist\Console\Command\MakeCommand;
 use Sedehi\Artist\Console\Command\MakeEvent;
+use Sedehi\Artist\Console\Command\MakeException;
 use Sedehi\Artist\Console\Command\MakeFactory;
 use Sedehi\Artist\Console\Command\MakeJob;
 use Sedehi\Artist\Console\Command\MakeListener;
@@ -102,6 +103,13 @@ class CommandServiceProvider extends ArtisanServiceProvider
     {
         $this->app->singleton('command.policy.make', function ($app) {
             return new MakePolicy($app['files']);
+        });
+    }
+
+    protected function registerExceptionMakeCommand()
+    {
+        $this->app->singleton('command.exception.make', function ($app) {
+            return new MakeException($app['files']);
         });
     }
 }
