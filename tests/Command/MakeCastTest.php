@@ -12,8 +12,9 @@ class MakeCastTest extends SectionTestCase
      */
     public function make_cast_with_section_option()
     {
-        if ( ! $this->supportCastCommand()) {
+        if (! $this->supportCastCommand()) {
             $this->assertTrue(true);
+
             return;
         }
 
@@ -33,8 +34,9 @@ class MakeCastTest extends SectionTestCase
      */
     public function test_cast_command_interactive()
     {
-        if ( ! $this->supportCastCommand()) {
+        if (! $this->supportCastCommand()) {
             $this->assertTrue(true);
+
             return;
         }
 
@@ -47,7 +49,7 @@ class MakeCastTest extends SectionTestCase
 
     private function supportCastCommand()
     {
-        $version = explode('.',$this->app->version());
+        $version = explode('.', $this->app->version());
 
         return reset($version) >= 7;
     }
