@@ -3,6 +3,7 @@
 namespace Sedehi\Artist\Console;
 
 use Illuminate\Foundation\Providers\ArtisanServiceProvider;
+use Sedehi\Artist\Console\Command\MakeCast;
 use Sedehi\Artist\Console\Command\MakeChannel;
 use Sedehi\Artist\Console\Command\MakeCommand;
 use Sedehi\Artist\Console\Command\MakeEvent;
@@ -102,6 +103,13 @@ class CommandServiceProvider extends ArtisanServiceProvider
     {
         $this->app->singleton('command.policy.make', function ($app) {
             return new MakePolicy($app['files']);
+        });
+    }
+
+    protected function registerCastMakeCommand()
+    {
+        $this->app->singleton('command.cast.make', function ($app) {
+            return new MakeCast($app['files']);
         });
     }
 }
