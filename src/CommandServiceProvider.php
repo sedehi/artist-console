@@ -2,6 +2,7 @@
 
 namespace Sedehi\Artist\Console;
 
+use Illuminate\Foundation\Console\CastMakeCommand;
 use Illuminate\Foundation\Providers\ArtisanServiceProvider;
 use Sedehi\Artist\Console\Command\MakeCast;
 use Sedehi\Artist\Console\Command\MakeChannel;
@@ -108,8 +109,15 @@ class CommandServiceProvider extends ArtisanServiceProvider
 
     protected function registerCastMakeCommand()
     {
-        $this->app->singleton('command.cast.make', function ($app) {
-            return new MakeCast($app['files']);
-        });
+        $version = explode('.',$this->app->version());
+
+        if (reset($version) >= 7) {
+            $this->app->singleton('command.cast.make', function ($app) {
+                return new MakeCast($app['files']);
+            });
+            return;
+        }
+
+        parent::registerCastMakeCommand();
     }
 }
