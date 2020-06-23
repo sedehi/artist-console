@@ -117,7 +117,5 @@ class CommandServiceProvider extends ArtisanServiceProvider
             });
             return;
         }
-
-        parent::registerCastMakeCommand();
     }
 }
