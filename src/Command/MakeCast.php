@@ -18,6 +18,7 @@ class MakeCast extends CastMakeCommand implements SectionName
         if ($this->option('section') !== null) {
             $namespace .= '\Controllers\\'.Str::studly($this->option('section'));
         }
+
         return $namespace.'\Casts';
     }
 }
