@@ -119,7 +119,7 @@ class CommandServiceProvider extends ArtisanServiceProvider
             return;
         }
     }
-  
+
     protected function registerExceptionMakeCommand()
     {
         $this->app->singleton('command.exception.make', function ($app) {
