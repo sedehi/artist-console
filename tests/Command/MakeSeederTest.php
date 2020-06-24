@@ -31,7 +31,7 @@ class MakeSeederTest extends SectionTestCase
         $path = database_path("seeds/{$this->sampleName}.php");
 
         $this->artisan('make:seeder', [
-            'name'  => $this->sampleName
+            'name'  => $this->sampleName,
         ]);
 
         $this->assertFileExists($path);
