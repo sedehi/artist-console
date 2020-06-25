@@ -4,6 +4,7 @@ namespace Sedehi\Artist\Console\Traits;
 
 use Exception;
 use ReflectionClass;
+use Sedehi\Artist\Console\Questions\ClassType;
 use Sedehi\Artist\Console\Questions\EventlName;
 use Sedehi\Artist\Console\Questions\ModelName;
 use Sedehi\Artist\Console\Questions\SectionName;
@@ -39,6 +40,20 @@ trait Interactive
         if ($this->implements(EventlName::class)) {
             $eventName = $this->ask('Enter event name: [optional]');
             $this->input->setOption('event', $eventName);
+        }
+        if ($this->implements(ClassType::class)) {
+            $createAdminType = $this->confirm('Create admin request ?');
+            $this->input->setOption('admin', $createAdminType);
+
+            $createSiteType = $this->confirm('Create site request ?');
+            $this->input->setOption('site', $createSiteType);
+
+            $createApiType = $this->confirm('Create api request ?');
+            $this->input->setOption('api', $createApiType);
+            if ($createApiType) {
+                $apiVersion = $this->ask('What is the api version ?','v1');
+                $this->input->setOption('request-version', $apiVersion);
+            }
         }
     }
 
