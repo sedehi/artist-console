@@ -92,10 +92,10 @@ class MakeRequestTest extends SectionTestCase
             'name'  => $this->sampleName,
             '--in'  => true,
         ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
-            ->expectsQuestion('Create admin request ?','y')
-            ->expectsQuestion('Create site request ?','y')
-            ->expectsQuestion('Create api request ?','y')
-            ->expectsQuestion('What is the api version ?','v3')
+            ->expectsQuestion('Create admin request ?', 'y')
+            ->expectsQuestion('Create site request ?', 'y')
+            ->expectsQuestion('Create api request ?', 'y')
+            ->expectsQuestion('What is the api version ?', 'v3')
             ->assertExitCode(0);
 
         $this->assertFileExists(

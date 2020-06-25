@@ -24,6 +24,7 @@ class MakeRequest extends RequestMakeCommand implements SectionName, ClassType
             ['site', null, InputOption::VALUE_NONE, 'Generate request for site'],
             ['api', null, InputOption::VALUE_NONE, 'Generate request for api'],
         ]);
+
         return $options;
     }
 
@@ -55,6 +56,7 @@ class MakeRequest extends RequestMakeCommand implements SectionName, ClassType
                 $namespace .= '\\'.Str::studly($this->option('request-version'));
             }
         }
+
         return $namespace;
     }
 
@@ -62,8 +64,9 @@ class MakeRequest extends RequestMakeCommand implements SectionName, ClassType
     {
         $this->interactive();
 
-        if (!$this->option('admin') && !$this->option('site') && !$this->option('api')) {
+        if (! $this->option('admin') && ! $this->option('site') && ! $this->option('api')) {
             parent::handle();
+
             return true;
         }
 

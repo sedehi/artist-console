@@ -51,7 +51,7 @@ trait Interactive
             $createApiType = $this->confirm('Create api request ?');
             $this->input->setOption('api', $createApiType);
             if ($createApiType) {
-                $apiVersion = $this->ask('What is the api version ?','v1');
+                $apiVersion = $this->ask('What is the api version ?', 'v1');
                 $this->input->setOption('request-version', $apiVersion);
             }
         }
