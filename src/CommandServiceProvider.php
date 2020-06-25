@@ -17,6 +17,7 @@ use Sedehi\Artist\Console\Command\MakeModel;
 use Sedehi\Artist\Console\Command\MakeNotification;
 use Sedehi\Artist\Console\Command\MakeObserver;
 use Sedehi\Artist\Console\Command\MakePolicy;
+use Sedehi\Artist\Console\Command\MakeRequest;
 use Sedehi\Artist\Console\Command\MakeRule;
 use Sedehi\Artist\Console\Command\MakeSeeder;
 
@@ -140,6 +141,13 @@ class CommandServiceProvider extends ArtisanServiceProvider
     {
         $this->app->singleton('command.seeder.make', function ($app) {
             return new MakeSeeder($app['files'], $app['composer']);
+        });
+    }
+
+    protected function registerRequestMakeCommand()
+    {
+        $this->app->singleton('command.request.make', function ($app) {
+            return new MakeRequest($app['files']);
         });
     }
 }
