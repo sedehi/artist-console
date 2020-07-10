@@ -5,11 +5,12 @@ namespace Sedehi\Artist\Console\Command;
 use Illuminate\Foundation\Console\ResourceMakeCommand;
 use Illuminate\Support\Str;
 use Sedehi\Artist\Console\Questions\ApiVersion;
+use Sedehi\Artist\Console\Questions\ResourceCollection;
 use Sedehi\Artist\Console\Questions\SectionName;
 use Sedehi\Artist\Console\Traits\Interactive;
 use Symfony\Component\Console\Input\InputOption;
 
-class MakeResource extends ResourceMakeCommand implements SectionName, ApiVersion
+class MakeResource extends ResourceMakeCommand implements SectionName, ApiVersion, ResourceCollection
 {
     use Interactive;
 

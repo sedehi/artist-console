@@ -58,6 +58,7 @@ class MakeResourceTest extends SectionTestCase
             '--in'  => true,
         ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
             ->expectsQuestion('What is the api version ?', 'v3')
+            ->expectsQuestion('Do you want to make a resource collection class ?', 'yes')
             ->assertExitCode(0);
 
         $this->assertFileExists(
