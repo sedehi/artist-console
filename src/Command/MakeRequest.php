@@ -19,7 +19,7 @@ class MakeRequest extends RequestMakeCommand implements SectionName, ClassType
         $options = array_merge($options, [
             ['section', null, InputOption::VALUE_OPTIONAL, 'The name of the section'],
             ['in', false, InputOption::VALUE_NONE, 'Interactive mode'],
-            ['request-version', 'av', InputOption::VALUE_OPTIONAL, 'Set request version'],
+            ['api-version', 'av', InputOption::VALUE_OPTIONAL, 'Set request version'],
             ['admin', null, InputOption::VALUE_NONE, 'Generate request for admin'],
             ['site', null, InputOption::VALUE_NONE, 'Generate request for site'],
             ['api', null, InputOption::VALUE_NONE, 'Generate request for api'],
@@ -52,8 +52,8 @@ class MakeRequest extends RequestMakeCommand implements SectionName, ClassType
         }
         if ($this->option('api')) {
             $namespace .= '\Api';
-            if ($this->option('request-version') !== null) {
-                $namespace .= '\\'.Str::studly($this->option('request-version'));
+            if ($this->option('api-version') !== null) {
+                $namespace .= '\\'.Str::studly($this->option('api-version'));
             }
         }
 
