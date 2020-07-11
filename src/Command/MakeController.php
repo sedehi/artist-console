@@ -43,7 +43,7 @@ class MakeController extends ControllerMakeCommand implements SectionName
         }
         if ($this->option('api')) {
             $namespace .= '\\Api';
-            if (!is_null($this->option('api-version'))) {
+            if (! is_null($this->option('api-version'))) {
                 $namespace .= '\\'.Str::studly($this->option('api-version'));
             }
         }
@@ -57,6 +57,7 @@ class MakeController extends ControllerMakeCommand implements SectionName
             if ($this->option('custom-views')) {
                 return __DIR__.'/stubs/controller-crud.stub';
             }
+
             return __DIR__.'/stubs/controller-crud-dynamic.stub';
         }
         if ($this->option('upload') && $this->option('model')) {
@@ -135,7 +136,7 @@ class MakeController extends ControllerMakeCommand implements SectionName
         if ($this->option('section')) {
             $modelClass = $this->laravel->getNamespace().'Http\\Controllers\\'.Str::studly($this->option('section')).'\\Models\\'.Str::studly($this->option('model'));
         }
-        if (!class_exists($modelClass)) {
+        if (! class_exists($modelClass)) {
             if ($this->confirm("A {$modelClass} model does not exist. Do you want to generate it?", true)) {
                 $this->call('make:model', [
                     'name'      => $modelClass,
