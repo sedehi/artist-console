@@ -4,13 +4,17 @@ namespace Sedehi\Artist\Console\Traits;
 
 use Exception;
 use ReflectionClass;
+use Sedehi\Artist\Console\Questions\ApiVersion;
 use Sedehi\Artist\Console\Questions\ClassType;
 use Sedehi\Artist\Console\Questions\EventlName;
 use Sedehi\Artist\Console\Questions\ModelName;
+use Sedehi\Artist\Console\Questions\ResourceCollection;
 use Sedehi\Artist\Console\Questions\SectionName;
 
 trait Interactive
 {
+    private $needApiVersion = false;
+
     public function handle()
     {
         $this->interactive();
@@ -50,10 +54,15 @@ trait Interactive
 
             $createApiType = $this->confirm('Create api request ?');
             $this->input->setOption('api', $createApiType);
-            if ($createApiType) {
-                $apiVersion = $this->ask('What is the api version ?', 'v1');
-                $this->input->setOption('request-version', $apiVersion);
-            }
+            $this->needApiVersion = $createApiType;
+        }
+        if ($this->implements(ApiVersion::class) || $this->needApiVersion) {
+            $apiVersion = $this->ask('What is the api version ?', 'v1');
+            $this->input->setOption('api-version', $apiVersion);
+        }
+        if ($this->implements(ResourceCollection::class)) {
+            $collectionType = $this->confirm('Do you want to make a resource collection class ?');
+            $this->input->setOption('collection', $collectionType);
         }
     }
 

@@ -76,7 +76,7 @@ class MakeRequestTest extends SectionTestCase
             'name'      => $this->sampleName,
             '--section' => $this->sectionName,
             '--api'   => true,
-            '--request-version'   => 'v2',
+            '--api-version'   => 'v2',
         ]);
 
         $this->assertFileExists($path);
