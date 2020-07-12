@@ -65,6 +65,7 @@ class MakeController extends ControllerMakeCommand implements SectionName
             if ($this->option('custom-views')) {
                 return __DIR__.'/stubs/controller-upload.stub';
             }
+
             return __DIR__.'/stubs/controller-upload-dynamic.stub';
         }
 
@@ -169,7 +170,7 @@ class MakeController extends ControllerMakeCommand implements SectionName
 
         return array_merge($replace, [
             'DummyViewPath' => $path,
-            'DummyViewForm' => $viewForm
+            'DummyViewForm' => $viewForm,
         ]);
     }
 
@@ -190,7 +191,7 @@ class MakeController extends ControllerMakeCommand implements SectionName
     {
         if ($this->option('section')) {
             $requestClass = $this->getRequestClass();
-            if (!class_exists($requestClass)) {
+            if (! class_exists($requestClass)) {
                 if ($this->confirm("A {$requestClass} Request does not exist. Do you want to generate it?", true)) {
                     $this->call('make:request', [
                         'name'              => Str::studly($this->nameWithoutController()).'Request',
@@ -219,8 +220,6 @@ class MakeController extends ControllerMakeCommand implements SectionName
         } elseif ($this->option('admin')) {
             return 'admin';
         }
-
-        return null;
     }
 
     protected function nameWithoutController()
