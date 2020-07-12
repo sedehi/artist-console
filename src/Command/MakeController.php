@@ -2,6 +2,7 @@
 
 namespace Sedehi\Artist\Console\Command;
 
+use Illuminate\Console\GeneratorCommand;
 use Illuminate\Routing\Console\ControllerMakeCommand;
 use Illuminate\Support\Str;
 use Sedehi\Artist\Console\Questions\SectionName;
@@ -63,7 +64,6 @@ class MakeController extends ControllerMakeCommand implements SectionName
             if ($this->option('custom-views')) {
                 return __DIR__.'/stubs/controller-upload.stub';
             }
-
             return __DIR__.'/stubs/controller-upload-dynamic.stub';
         }
 
@@ -85,16 +85,15 @@ class MakeController extends ControllerMakeCommand implements SectionName
         }
 
         if ($this->option('section')) {
-            $replace = $this->buildSectionReplacements($replace);
-            $replace = $this->buildRequestReplacements($replace);
             $replace = $this->buildViewsReplacements($replace);
+            $replace = $this->buildRequestReplacements($replace);
             $replace = $this->buildActionReplacements($replace);
         }
 
         $replace["use {$controllerNamespace}\Controller;\n"] = '';
 
         return str_replace(
-            array_keys($replace), array_values($replace), parent::buildClass($name)
+            array_keys($replace), array_values($replace), GeneratorCommand::buildClass($name)
         );
     }
 
@@ -155,5 +154,97 @@ class MakeController extends ControllerMakeCommand implements SectionName
             '{{ modelVariable }}' => lcfirst(class_basename($modelClass)),
             '{{modelVariable}}' => lcfirst(class_basename($modelClass)),
         ]);
+    }
+
+    protected function buildViewsReplacements($replace)
+    {
+        $viewForm = strtolower($this->nameWithoutController());
+
+        if ($this->option('section')) {
+            $path = Str::studly($this->option('section')).'.views.'.$this->type().'.'.strtolower($this->option('section'));
+        } else {
+            $path = 'views.'.$viewForm;
+        }
+
+        return array_merge($replace, [
+            'DummyViewPath' => $path,
+            'DummyViewForm' => $viewForm
+        ]);
+    }
+
+    protected function buildActionReplacements($replace)
+    {
+        if ($this->option('section')) {
+            $path = Str::studly($this->option('section')).'\\Controllers\\'.Str::studly($this->type()).'\\'.Str::studly($this->argument('name'));
+        } else {
+            $path = Str::studly($this->argument('name'));
+        }
+
+        return array_merge($replace, [
+            'DummyAction' => $path,
+        ]);
+    }
+
+    protected function buildRequestReplacements($replace)
+    {
+        if ($this->option('section')) {
+            $requestClass = $this->getRequestClass();
+            if (!class_exists($requestClass)) {
+                if ($this->confirm("A {$requestClass} Request does not exist. Do you want to generate it?", true)) {
+                    $this->call('make:request', [
+                        'name'              => Str::studly($this->nameWithoutController()).'Request',
+                        '--section'         => $this->option('section'),
+                        '--admin'           => $this->option('admin'),
+                        '--site'            => $this->option('site'),
+                        '--api'             => $this->option('api'),
+                        '--api-version'     => $this->option('api-version') ? $this->option('api-version') : 'V1',
+                    ]);
+                }
+            }
+        }
+
+        return array_merge($replace, [
+            'DummyFullRequestClass' => ($this->option('section')) ? $requestClass : 'Illuminate\Http\Request',
+            'DummyRequestClass'     => ($this->option('section')) ? Str::studly($this->nameWithoutController()).'Request' : 'Request',
+        ]);
+    }
+
+    protected function type()
+    {
+        if ($this->option('api')) {
+            return 'api';
+        } elseif ($this->option('site')) {
+            return 'site';
+        } elseif ($this->option('admin')) {
+            return 'admin';
+        }
+
+        return null;
+    }
+
+    protected function nameWithoutController()
+    {
+        return str_replace('Controller', '', $this->argument('name'));
+    }
+
+    protected function getRequestClass()
+    {
+        $class = $this->laravel->getNamespace().'Http\\Controllers\\'.Str::studly($this->option('section')).'\\Requests\\';
+
+        if ($this->option('api')) {
+            if ($this->option('api-version')) {
+                $class .= 'Api\\'.Str::studly($this->option('api-version')).'\\';
+            } else {
+                $class .= 'Api\\V1\\';
+            }
+        } elseif ($this->option('site')) {
+            $class .= 'Site\\';
+        } elseif ($this->option('admin')) {
+            $class .= 'Admin\\';
+        }
+
+        $class .= Str::studly($this->nameWithoutController()).'Request';
+
+        return $class;
     }
 }

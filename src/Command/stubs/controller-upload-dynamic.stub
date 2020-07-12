@@ -9,7 +9,7 @@ use App\Libs\ImageMaker;
 
 class DummyClass extends Controller
 {
-    public static $viewForm = 'DummySectionLower';
+    public static $viewForm = 'DummyViewForm';
 
 	public function index()
 	{

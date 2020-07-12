@@ -8,7 +8,6 @@ use DummyFullRequestClass;
 
 class DummyClass extends Controller
 {
-
     public function index()
     {
         $items = DummyModelClass::latest('id')->simplePaginate(10);
@@ -23,8 +22,8 @@ class DummyClass extends Controller
 
     public function store(DummyRequestClass $request)
     {
-        $item             = new DummyModelClass();
-        $item->title       = $request->get('title');
+        $item           = new DummyModelClass();
+        $item->title    = $request->get('title');
         $item->save();
 
         return redirect()->action('DummyAction@index')->with('success', trans('admin.saved'));
@@ -34,19 +33,21 @@ class DummyClass extends Controller
     public function edit($id)
     {
         $item = DummyModelClass::findOrFail($id);
+
         return view('DummyViewPath.edit', compact('item'));
     }
 
     public function show($id)
     {
         $item = DummyModelClass::findOrFail($id);
+
         return view('DummyViewPath.show', compact('item'));
     }
 
     public function update(DummyRequestClass $request, $id)
     {
-        $item             = DummyModelClass::findOrFail($id);
-        $item->title       = $request->get('title');
+        $item           = DummyModelClass::findOrFail($id);
+        $item->title    = $request->get('title');
         $item->save();
 
         return redirect()->action('DummyAction@index')->with('success', trans('admin.saved'));
