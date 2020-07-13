@@ -109,6 +109,17 @@ trait Interactive
             $collectionType = $this->confirm('Do you want to make a resource collection class ?');
             $this->input->setOption('collection', $collectionType);
         }
+
+        // additional controller related options
+        if (isset($controllerType)) {
+            if ($this->confirm('Show additional options for controller ?')) {
+                $force = $this->confirm('Do you want to force create the controller class ?');
+                $this->input->setOption('force', $force);
+
+                $customViews = $this->confirm('Do you want to add custom views option for controller class ?');
+                $this->input->setOption('custom-views', $customViews);
+            }
+        }
     }
 
     protected function implements($class)
