@@ -46,7 +46,7 @@ trait Interactive
 
         // controller related checks
         if ($this->implements(ControllerType::class)) {
-            $controllerType = $this->choice('What type of controller do you want ?',[
+            $controllerType = $this->choice('What type of controller do you want ?', [
                 'invokable',
                 'resource',
                 'crud',
@@ -80,10 +80,10 @@ trait Interactive
             $this->input->setOption('event', $eventName);
         }
         if ($this->implements(ClassType::class)) {
-            $classType = $this->choice('What part this class belongs to ?',[
+            $classType = $this->choice('What part this class belongs to ?', [
                 'admin',
                 'site',
-                'api'
+                'api',
             ]);
             $this->input->setOption($classType, true);
             if ($classType == 'api') {

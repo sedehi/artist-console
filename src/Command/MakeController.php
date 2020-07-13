@@ -77,13 +77,15 @@ class MakeController extends ControllerMakeCommand implements SectionName, Contr
     public function handle()
     {
         if ($this->option('crud')) {
-            if (!$this->option('model')) {
+            if (! $this->option('model')) {
                 $this->error('You should specify model when using crud option');
+
                 return false;
             }
         }
 
         $this->interactive();
+
         return parent::handle();
     }
 
