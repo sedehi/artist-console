@@ -5,11 +5,13 @@ namespace Sedehi\Artist\Console\Command;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Routing\Console\ControllerMakeCommand;
 use Illuminate\Support\Str;
+use Sedehi\Artist\Console\Questions\ClassType;
+use Sedehi\Artist\Console\Questions\ControllerType;
 use Sedehi\Artist\Console\Questions\SectionName;
 use Sedehi\Artist\Console\Traits\Interactive;
 use Symfony\Component\Console\Input\InputOption;
 
-class MakeController extends ControllerMakeCommand implements SectionName
+class MakeController extends ControllerMakeCommand implements SectionName, ControllerType, ClassType
 {
     use Interactive;
 
@@ -70,6 +72,19 @@ class MakeController extends ControllerMakeCommand implements SectionName
         }
 
         return parent::getStub();
+    }
+
+    public function handle()
+    {
+        if ($this->option('crud')) {
+            if (!$this->option('model')) {
+                $this->error('You should specify model when using crud option');
+                return false;
+            }
+        }
+
+        $this->interactive();
+        return parent::handle();
     }
 
     protected function buildClass($name)
