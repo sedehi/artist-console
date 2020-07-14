@@ -76,6 +76,8 @@ class MakeController extends ControllerMakeCommand implements SectionName, Contr
 
     public function handle()
     {
+        $this->interactive();
+
         if ($this->option('crud')) {
             if (! $this->option('model')) {
                 $this->error('You should specify model when using crud option');
@@ -83,8 +85,6 @@ class MakeController extends ControllerMakeCommand implements SectionName, Contr
                 return false;
             }
         }
-
-        $this->interactive();
 
         return parent::handle();
     }
@@ -104,6 +104,7 @@ class MakeController extends ControllerMakeCommand implements SectionName, Contr
         }
 
         if ($this->option('section')) {
+            $replace = $this->buildSectionReplacements($replace);
             $replace = $this->buildViewsReplacements($replace);
             $replace = $this->buildRequestReplacements($replace);
             $replace = $this->buildActionReplacements($replace);
@@ -172,6 +173,16 @@ class MakeController extends ControllerMakeCommand implements SectionName, Contr
             'DummyModelVariable' => lcfirst(class_basename($modelClass)),
             '{{ modelVariable }}' => lcfirst(class_basename($modelClass)),
             '{{modelVariable}}' => lcfirst(class_basename($modelClass)),
+        ]);
+    }
+
+    protected function buildSectionReplacements($replace)
+    {
+        $section = Str::studly($this->option('section'));
+
+        return array_merge($replace, [
+            'DummySectionNormal' => $section,
+            'DummySectionLower'  => strtolower($section),
         ]);
     }
 

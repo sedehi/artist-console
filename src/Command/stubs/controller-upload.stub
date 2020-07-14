@@ -9,7 +9,7 @@ use App\Libs\ImageMaker;
 
 class DummyClass extends Controller
 {
-    
+
 	public function index()
 	{
 	   $items = DummyModelClass::latest('id')->simplePaginate(10);
@@ -49,12 +49,14 @@ class DummyClass extends Controller
     public function edit($id)
     {
         $item = DummyModelClass::findOrFail($id);
+
         return view('DummyViewPath.edit', compact('item'));
     }
 
     public function show($id)
     {
         $item = DummyModelClass::findOrFail($id);
+
         return view('DummyViewPath.show', compact('item'));
     }
 
@@ -78,11 +80,6 @@ class DummyClass extends Controller
                   ImageMaker::make()->path(config('image.paths.DummySectionLower'))->name($item->picture)->remove();
             }
             $item->picture = $fileName;
-        }else {
-            if ($request->get('file_remove') == 1) {
-                removeImage($this->uploadPath,$item->picture);
-                $item->picture = null;
-            }
         }
         $item->save();
 
@@ -95,7 +92,7 @@ class DummyClass extends Controller
         $items  = DummyModelClass::whereIn('id', $request->get('deleteId'))->get();
 
         foreach ($items as $item) {
-            removeImage($this->uploadPath,$item->picture);
+            ImageMaker::make()->path(config('image.paths.DummySectionLower'))->name($item->picture)->remove();
         }
 
         $items->each->delete();

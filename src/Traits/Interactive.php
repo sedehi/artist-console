@@ -46,17 +46,23 @@ trait Interactive
 
         // controller related checks
         if ($this->implements(ControllerType::class)) {
-            $controllerType = $this->choice('What type of controller do you want ?', [
+            $choices = [
                 'invokable',
                 'resource',
-                'crud',
-                'upload',
-            ]);
-            $this->input->setOption($controllerType, $controllerType);
+            ];
+            if ($this->option('section')) {
+                $choices = array_merge($choices,[
+                    'crud',
+                    'upload',
+                ]);
+            }
+            $controllerType = $this->choice('What type of controller do you want ?', $choices);
+            $this->input->setOption($controllerType, true);
         }
         if (isset($controllerType)) {
             switch ($controllerType) {
                 case 'crud':
+                case 'upload':
                     $this->needModel = true;
                     break;
                 case 'resource':
@@ -68,7 +74,17 @@ trait Interactive
         }
 
         if ($this->implements(ModelName::class) || $this->needModel) {
-            $modelName = $this->ask('Enter model name: [optional]');
+
+            $modelName = null;
+
+            if ($this->needModel) {
+                while (!$modelName) {
+                    $modelName = $this->ask('Enter model name');
+                }
+            } else {
+                $modelName = $this->ask('Enter model name: [optional]');
+            }
+
             $this->input->setOption('model', $modelName);
         }
         if ($this->implements(ParentModelName::class) || $this->needParentModel) {
@@ -84,10 +100,13 @@ trait Interactive
                 'admin',
                 'site',
                 'api',
+                'none',
             ]);
-            $this->input->setOption($classType, true);
-            if ($classType == 'api') {
-                $this->needApiVersion = true;
+            if ($classType !== 'none') {
+                $this->input->setOption($classType, true);
+                if ($classType == 'api') {
+                    $this->needApiVersion = true;
+                }
             }
         }
         if ($this->implements(ClassTypeMultiple::class)) {
