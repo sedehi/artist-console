@@ -4,12 +4,12 @@ namespace Sedehi\Artist\Console\Command;
 
 use Illuminate\Foundation\Console\RequestMakeCommand;
 use Illuminate\Support\Str;
-use Sedehi\Artist\Console\Questions\ClassType;
+use Sedehi\Artist\Console\Questions\ClassTypeMultiple;
 use Sedehi\Artist\Console\Questions\SectionName;
 use Sedehi\Artist\Console\Traits\Interactive;
 use Symfony\Component\Console\Input\InputOption;
 
-class MakeRequest extends RequestMakeCommand implements SectionName, ClassType
+class MakeRequest extends RequestMakeCommand implements SectionName, ClassTypeMultiple
 {
     use Interactive;
 
