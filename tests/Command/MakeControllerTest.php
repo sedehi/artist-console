@@ -119,7 +119,6 @@ class MakeControllerTest extends SectionTestCase
      */
     public function interactive_controller_types()
     {
-        // controller types without section input
         $requestClass = app()->getNamespace().'Http\\Controllers\\'.$this->sectionName."\\Requests\\{$this->sampleName}Request";
 
         $this->artisan('make:controller', [

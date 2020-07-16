@@ -51,7 +51,7 @@ trait Interactive
                 'resource',
             ];
             if ($this->option('section')) {
-                $choices = array_merge($choices,[
+                $choices = array_merge($choices, [
                     'crud',
                     'upload',
                 ]);
@@ -74,11 +74,10 @@ trait Interactive
         }
 
         if ($this->implements(ModelName::class) || $this->needModel) {
-
             $modelName = null;
 
             if ($this->needModel) {
-                while (!$modelName) {
+                while (! $modelName) {
                     $modelName = $this->ask('Enter model name');
                 }
             } else {
