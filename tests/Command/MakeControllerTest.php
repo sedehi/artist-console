@@ -151,9 +151,9 @@ class MakeControllerTest extends SectionTestCase
             ->expectsQuestion('Add parent model to resource controller ?', 'yes')
             ->expectsQuestion('Enter parent model name:', $this->sampleName)
             ->expectsQuestion('What part this class belongs to ?', 'none')
-            ->expectsQuestion('Show additional options for controller ?',false)
-            ->expectsQuestion("A {$modelClass} model does not exist. Do you want to generate it?",'no')
-            ->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?",'no')
+            ->expectsQuestion('Show additional options for controller ?', false)
+            ->expectsQuestion("A {$modelClass} model does not exist. Do you want to generate it?", 'no')
+            ->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
             ->assertExitCode(0);
     }
 
@@ -174,8 +174,8 @@ class MakeControllerTest extends SectionTestCase
             ->expectsQuestion('Enter model name', $this->sampleName)
             ->expectsQuestion('What part this class belongs to ?', 'none')
             ->expectsQuestion('Show additional options for controller ?', false)
-            ->expectsQuestion("A {$modelClass} model does not exist. Do you want to generate it?",'no')
-            ->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?",'no')
+            ->expectsQuestion("A {$modelClass} model does not exist. Do you want to generate it?", 'no')
+            ->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
             ->assertExitCode(0);
     }
 
@@ -196,8 +196,8 @@ class MakeControllerTest extends SectionTestCase
             ->expectsQuestion('Enter model name', $this->sampleName)
             ->expectsQuestion('What part this class belongs to ?', 'none')
             ->expectsQuestion('Show additional options for controller ?', false)
-            ->expectsQuestion("A {$modelClass} model does not exist. Do you want to generate it?",'no')
-            ->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?",'no')
+            ->expectsQuestion("A {$modelClass} model does not exist. Do you want to generate it?", 'no')
+            ->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
             ->assertExitCode(0);
     }
 }
