@@ -28,7 +28,7 @@ class MakeControllerTest extends SectionTestCase
         $this->artisan('make:controller', [
             'name'      => $this->sampleName,
             '--section' => $this->sectionName,
-        ])->expectsConfirmation("A {$requestClass} Request does not exist. Do you want to generate it?", 'yes')
+        ])->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?", 'yes')
             ->assertExitCode(0);
 
         $this->assertFileExists($path);
@@ -50,7 +50,7 @@ class MakeControllerTest extends SectionTestCase
             'name'      => $this->sampleName,
             '--section' => $this->sectionName,
             '--admin'   => true,
-        ])->expectsConfirmation("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
+        ])->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
             ->assertExitCode(0);
 
         $this->assertFileExists($path);
@@ -64,7 +64,7 @@ class MakeControllerTest extends SectionTestCase
             'name'      => $this->sampleName,
             '--section' => $this->sectionName,
             '--site'   => true,
-        ])->expectsConfirmation("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
+        ])->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
             ->assertExitCode(0);
 
         $this->assertFileExists($path);
@@ -78,7 +78,7 @@ class MakeControllerTest extends SectionTestCase
             'name'      => $this->sampleName,
             '--section' => $this->sectionName,
             '--api'   => true,
-        ])->expectsConfirmation("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
+        ])->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
             ->assertExitCode(0);
 
         $this->assertFileExists($path);
@@ -93,7 +93,7 @@ class MakeControllerTest extends SectionTestCase
             '--section' => $this->sectionName,
             '--api'   => true,
             '--api-version'   => 'v2',
-        ])->expectsConfirmation("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
+        ])->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
             ->assertExitCode(0);
 
         $this->assertFileExists($path);
@@ -117,31 +117,21 @@ class MakeControllerTest extends SectionTestCase
      * @return void
      * @test
      */
-    public function interactive_controller_types_and_section_option()
+    public function interactive_controller_types()
     {
         // controller types without section input
-        $this->artisan('make:controller', [
-            'name'  => $this->sampleName,
-            '--in'  => true,
-        ])->expectsQuestion('Enter section name: [optional]',null)
-            ->expectsChoice('What type of controller do you want ?','invokable',['invokable','resource'])
-            ->expectsChoice('What part this class belongs to ?','none',['admin','site','api','none'])
-            ->expectsConfirmation('Show additional options for controller ?','yes')
-            ->expectsConfirmation('Do you want to force create the controller class ?','yes')
-            ->expectsConfirmation('Do you want to add custom views option for controller class ?','yes')
-            ->assertExitCode(0);
-
-        // controller types with section input
         $requestClass = app()->getNamespace().'Http\\Controllers\\'.$this->sectionName."\\Requests\\{$this->sampleName}Request";
 
         $this->artisan('make:controller', [
             'name'  => $this->sampleName,
             '--in'  => true,
-        ])->expectsQuestion('Enter section name: [optional]',$this->sectionName)
-            ->expectsChoice('What type of controller do you want ?','invokable',['invokable','resource','crud','upload'])
-            ->expectsChoice('What part this class belongs to ?','none',['admin','site','api','none'])
-            ->expectsConfirmation('Show additional options for controller ?','no')
-            ->expectsConfirmation("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
+        ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
+            ->expectsQuestion('What type of controller do you want ?', 'invokable')
+            ->expectsQuestion('What part this class belongs to ?', 'none')
+            ->expectsQuestion('Show additional options for controller ?', 'yes')
+            ->expectsQuestion('Do you want to force create the controller class ?', 'yes')
+            ->expectsQuestion('Do you want to add custom views option for controller class ?', 'yes')
+            ->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?", 'no')
             ->assertExitCode(0);
     }
 
@@ -157,14 +147,14 @@ class MakeControllerTest extends SectionTestCase
         $this->artisan('make:controller', [
             'name'  => $this->sampleName,
             '--in'  => true,
-        ])->expectsQuestion('Enter section name: [optional]',$this->sectionName)
-            ->expectsChoice('What type of controller do you want ?','resource',['invokable','resource','crud','upload'])
-            ->expectsConfirmation('Add parent model to resource controller ?','yes')
-            ->expectsQuestion('Enter parent model name:',$this->sampleName)
-            ->expectsChoice('What part this class belongs to ?','none',['admin','site','api','none'])
-            ->expectsConfirmation('Show additional options for controller ?','no')
-            ->expectsConfirmation("A {$modelClass} model does not exist. Do you want to generate it?")
-            ->expectsConfirmation("A {$requestClass} Request does not exist. Do you want to generate it?")
+        ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
+            ->expectsQuestion('What type of controller do you want ?', 'resource')
+            ->expectsQuestion('Add parent model to resource controller ?', 'yes')
+            ->expectsQuestion('Enter parent model name:', $this->sampleName)
+            ->expectsQuestion('What part this class belongs to ?', 'none')
+            ->expectsQuestion('Show additional options for controller ?',false)
+            ->expectsQuestion("A {$modelClass} model does not exist. Do you want to generate it?",'no')
+            ->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?",'no')
             ->assertExitCode(0);
     }
 
@@ -180,13 +170,13 @@ class MakeControllerTest extends SectionTestCase
         $this->artisan('make:controller', [
             'name'  => $this->sampleName,
             '--in'  => true,
-        ])->expectsQuestion('Enter section name: [optional]',$this->sectionName)
-            ->expectsChoice('What type of controller do you want ?','crud',['invokable','resource','crud','upload'])
-            ->expectsQuestion('Enter model name',$this->sampleName)
-            ->expectsChoice('What part this class belongs to ?','none',['admin','site','api','none'])
-            ->expectsConfirmation('Show additional options for controller ?','no')
-            ->expectsConfirmation("A {$modelClass} model does not exist. Do you want to generate it?")
-            ->expectsConfirmation("A {$requestClass} Request does not exist. Do you want to generate it?")
+        ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
+            ->expectsQuestion('What type of controller do you want ?', 'crud')
+            ->expectsQuestion('Enter model name', $this->sampleName)
+            ->expectsQuestion('What part this class belongs to ?', 'none')
+            ->expectsQuestion('Show additional options for controller ?', false)
+            ->expectsQuestion("A {$modelClass} model does not exist. Do you want to generate it?",'no')
+            ->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?",'no')
             ->assertExitCode(0);
     }
 
@@ -202,13 +192,13 @@ class MakeControllerTest extends SectionTestCase
         $this->artisan('make:controller', [
             'name'  => $this->sampleName,
             '--in'  => true,
-        ])->expectsQuestion('Enter section name: [optional]',$this->sectionName)
-            ->expectsChoice('What type of controller do you want ?','upload',['invokable','resource','crud','upload'])
-            ->expectsQuestion('Enter model name',$this->sampleName)
-            ->expectsChoice('What part this class belongs to ?','none',['admin','site','api','none'])
-            ->expectsConfirmation('Show additional options for controller ?','no')
-            ->expectsConfirmation("A {$modelClass} model does not exist. Do you want to generate it?")
-            ->expectsConfirmation("A {$requestClass} Request does not exist. Do you want to generate it?")
+        ])->expectsQuestion('Enter section name: [optional]', $this->sectionName)
+            ->expectsQuestion('What type of controller do you want ?', 'upload')
+            ->expectsQuestion('Enter model name', $this->sampleName)
+            ->expectsQuestion('What part this class belongs to ?', 'none')
+            ->expectsQuestion('Show additional options for controller ?', false)
+            ->expectsQuestion("A {$modelClass} model does not exist. Do you want to generate it?",'no')
+            ->expectsQuestion("A {$requestClass} Request does not exist. Do you want to generate it?",'no')
             ->assertExitCode(0);
     }
 }
