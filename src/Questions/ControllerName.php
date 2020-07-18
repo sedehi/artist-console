@@ -2,6 +2,6 @@
 
 namespace Sedehi\Artist\Console\Questions;
 
-interface EventlName
+interface ControllerName
 {
 }

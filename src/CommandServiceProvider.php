@@ -22,6 +22,7 @@ use Sedehi\Artist\Console\Command\MakeRequest;
 use Sedehi\Artist\Console\Command\MakeResource;
 use Sedehi\Artist\Console\Command\MakeRule;
 use Sedehi\Artist\Console\Command\MakeSeeder;
+use Sedehi\Artist\Console\Command\MakeTest;
 
 class CommandServiceProvider extends ArtisanServiceProvider
 {
@@ -164,6 +165,13 @@ class CommandServiceProvider extends ArtisanServiceProvider
     {
         $this->app->singleton('command.controller.make', function ($app) {
             return new MakeController($app['files']);
+        });
+    }
+
+    protected function registerTestMakeCommand()
+    {
+        $this->app->singleton('command.test.make', function ($app) {
+            return new MakeTest($app['files']);
         });
     }
 }
