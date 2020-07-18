@@ -30,12 +30,14 @@ class MakeTest extends TestMakeCommand implements SectionName
     public function handle()
     {
         if ($this->option('section') && $this->option('crud')) {
-            if (!$this->option('model')) {
+            if (! $this->option('model')) {
                 $this->error('You should specify model name if using crud option');
+
                 return false;
             }
-            if (!$this->option('controller')) {
+            if (! $this->option('controller')) {
                 $this->error('You should specify controller name if using crud option');
+
                 return false;
             }
         }
@@ -91,12 +93,13 @@ class MakeTest extends TestMakeCommand implements SectionName
         if ($this->option('section') !== null) {
             return $this->laravel->getNamespace();
         }
+
         return 'Tests';
     }
 
     protected function getStub()
     {
-        if ($this->option('section') == null || !$this->option('crud')) {
+        if ($this->option('section') == null || ! $this->option('crud')) {
             return parent::getStub();
         }
 

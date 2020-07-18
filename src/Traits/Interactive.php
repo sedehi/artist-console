@@ -79,7 +79,6 @@ trait Interactive
 
         // test command related checks
         if ($this instanceof MakeTest) {
-
             $unit = $this->confirm('Do you want to create a unit test class ?');
             $this->input->setOption('unit', $unit);
 
