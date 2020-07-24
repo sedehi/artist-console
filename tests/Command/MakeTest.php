@@ -29,6 +29,7 @@ class MakeTest extends SectionTestCase
 
         $this->assertFileExists($path);
     }
+
     /**
      * @return void
      * @test
