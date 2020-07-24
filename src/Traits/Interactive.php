@@ -4,11 +4,13 @@ namespace Sedehi\Artist\Console\Traits;
 
 use Exception;
 use ReflectionClass;
+use Sedehi\Artist\Console\Command\MakeTest;
 use Sedehi\Artist\Console\Questions\ApiVersion;
 use Sedehi\Artist\Console\Questions\ClassType;
 use Sedehi\Artist\Console\Questions\ClassTypeMultiple;
+use Sedehi\Artist\Console\Questions\ControllerName;
 use Sedehi\Artist\Console\Questions\ControllerType;
-use Sedehi\Artist\Console\Questions\EventlName;
+use Sedehi\Artist\Console\Questions\EventName;
 use Sedehi\Artist\Console\Questions\ModelName;
 use Sedehi\Artist\Console\Questions\ParentModelName;
 use Sedehi\Artist\Console\Questions\ResourceCollection;
@@ -19,6 +21,8 @@ trait Interactive
     private $needApiVersion = false;
     private $needModel = false;
     private $needParentModel = false;
+    private $needController = false;
+    private $needClassType = false;
 
     public function handle()
     {
@@ -73,6 +77,36 @@ trait Interactive
             }
         }
 
+        // test command related checks
+        if ($this instanceof MakeTest) {
+            $unit = $this->confirm('Do you want to create a unit test class ?');
+            $this->input->setOption('unit', $unit);
+
+            if ($this->option('section')) {
+                $crud = $this->confirm('Do you want to create a crud test ?');
+                $this->input->setOption('crud', $crud);
+                if ($crud) {
+                    $this->needModel = true;
+                    $this->needController = true;
+                    $this->needClassType = true;
+                }
+            }
+        }
+
+        if ($this->implements(ControllerName::class) || $this->needController) {
+            $controllerName = null;
+
+            if ($this->needController) {
+                while (! $controllerName) {
+                    $controllerName = $this->ask('Enter controller name');
+                }
+            } else {
+                $controllerName = $this->ask('Enter controller name: [optional]');
+            }
+
+            $this->input->setOption('controller', $controllerName);
+        }
+
         if ($this->implements(ModelName::class) || $this->needModel) {
             $modelName = null;
 
@@ -90,11 +124,11 @@ trait Interactive
             $parentModelName = $this->ask('Enter parent model name:');
             $this->input->setOption('parent', $parentModelName);
         }
-        if ($this->implements(EventlName::class)) {
+        if ($this->implements(EventName::class)) {
             $eventName = $this->ask('Enter event name: [optional]');
             $this->input->setOption('event', $eventName);
         }
-        if ($this->implements(ClassType::class)) {
+        if ($this->implements(ClassType::class) || $this->needClassType) {
             $classType = $this->choice('What part this class belongs to ?', [
                 'admin',
                 'site',
