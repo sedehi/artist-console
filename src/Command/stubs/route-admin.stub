@@ -1,0 +1,4 @@
+
+Route::group(['namespace' =>'{{{name}}}\Controllers\Admin'], function () {
+    Route::resource('{{{url}}}', '{{{controller}}}');
+});
