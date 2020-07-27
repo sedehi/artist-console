@@ -32,7 +32,7 @@ class CommandServiceProvider extends ArtisanServiceProvider
         $this->devCommands = array_merge(
             $this->devCommands,
             [
-                'SubsectionMake'   =>  MakeSubsection::class
+                'SubsectionMake'   =>  MakeSubsection::class,
             ]
         );
 

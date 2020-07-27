@@ -130,7 +130,7 @@ class MakeSubsection extends Command
             'name'      => ucfirst($this->argument('name')).'Controller',
             '--site'    => true,
         ]);
-        if (!File::isDirectory(app_path('Http/Controllers/'.ucfirst($this->argument('name')).'/views/site/'))) {
+        if (! File::isDirectory(app_path('Http/Controllers/'.ucfirst($this->argument('name')).'/views/site/'))) {
             File::makeDirectory(app_path('Http/Controllers/'.ucfirst($this->argument('name')).'/views/site/'), 0775, true);
         }
     }
@@ -155,7 +155,7 @@ class MakeSubsection extends Command
 
     private function makeRole($title)
     {
-        if (!File::isDirectory(app_path('Http/Controllers/'.ucfirst($this->argument('name')).'/'.''))) {
+        if (! File::isDirectory(app_path('Http/Controllers/'.ucfirst($this->argument('name')).'/'.''))) {
             File::makeDirectory(app_path('Http/Controllers/'.ucfirst($this->argument('name')).'/'.''), 0775, true);
         }
         if (File::exists(app_path('Http/Controllers/'.ucfirst($this->argument('name')).'/roles.php'))) {
@@ -172,7 +172,7 @@ class MakeSubsection extends Command
 
     private function makeRoute($adminController, $siteController, $apiController)
     {
-        if (!File::isDirectory(app_path('Http/Controllers/'.ucfirst($this->argument('name')).'/'.'routes'))) {
+        if (! File::isDirectory(app_path('Http/Controllers/'.ucfirst($this->argument('name')).'/'.'routes'))) {
             File::makeDirectory(app_path('Http/Controllers/'.ucfirst($this->argument('name')).'/'.'routes'), 0775, true);
         }
         if ($siteController) {
