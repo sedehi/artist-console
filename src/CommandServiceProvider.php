@@ -21,6 +21,7 @@ use Sedehi\Artist\Console\Command\MakePolicy;
 use Sedehi\Artist\Console\Command\MakeRequest;
 use Sedehi\Artist\Console\Command\MakeResource;
 use Sedehi\Artist\Console\Command\MakeRule;
+use Sedehi\Artist\Console\Command\MakeSection;
 use Sedehi\Artist\Console\Command\MakeSeeder;
 use Sedehi\Artist\Console\Command\MakeSubsection;
 use Sedehi\Artist\Console\Command\MakeTest;
@@ -33,6 +34,7 @@ class CommandServiceProvider extends ArtisanServiceProvider
         $this->devCommands = array_merge(
             $this->devCommands,
             [
+                'SectionMake'      =>  MakeSection::class,
                 'SubsectionMake'   =>  MakeSubsection::class,
                 'ViewMake'         =>  MakeView::class,
             ]
@@ -201,6 +203,13 @@ class CommandServiceProvider extends ArtisanServiceProvider
     {
         $this->app->singleton('command.view.make', function ($app) {
             return new MakeView();
+        });
+    }
+
+    protected function registerSectionMakeCommand()
+    {
+        $this->app->singleton('command.section.make', function ($app) {
+            return new MakeSection();
         });
     }
 }
