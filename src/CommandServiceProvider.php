@@ -21,11 +21,28 @@ use Sedehi\Artist\Console\Command\MakePolicy;
 use Sedehi\Artist\Console\Command\MakeRequest;
 use Sedehi\Artist\Console\Command\MakeResource;
 use Sedehi\Artist\Console\Command\MakeRule;
+use Sedehi\Artist\Console\Command\MakeSection;
 use Sedehi\Artist\Console\Command\MakeSeeder;
+use Sedehi\Artist\Console\Command\MakeSubsection;
 use Sedehi\Artist\Console\Command\MakeTest;
+use Sedehi\Artist\Console\Command\MakeView;
 
 class CommandServiceProvider extends ArtisanServiceProvider
 {
+    public function register()
+    {
+        $this->devCommands = array_merge(
+            $this->devCommands,
+            [
+                'SectionMake'      =>  MakeSection::class,
+                'SubsectionMake'   =>  MakeSubsection::class,
+                'ViewMake'         =>  MakeView::class,
+            ]
+        );
+
+        parent::register();
+    }
+
     protected function registerModelMakeCommand()
     {
         $this->app->singleton('command.model.make', function ($app) {
@@ -172,6 +189,27 @@ class CommandServiceProvider extends ArtisanServiceProvider
     {
         $this->app->singleton('command.test.make', function ($app) {
             return new MakeTest($app['files']);
+        });
+    }
+
+    protected function registerSubsectionMakeCommand()
+    {
+        $this->app->singleton('command.subsection.make', function ($app) {
+            return new MakeSubsection();
+        });
+    }
+
+    protected function registerViewMakeCommand()
+    {
+        $this->app->singleton('command.view.make', function ($app) {
+            return new MakeView();
+        });
+    }
+
+    protected function registerSectionMakeCommand()
+    {
+        $this->app->singleton('command.section.make', function ($app) {
+            return new MakeSection();
         });
     }
 }
