@@ -60,13 +60,13 @@ class MakeSubsectionTest extends SectionTestCase
             app_path('Http/Controllers/'.$this->sectionName."/database/factories/{$this->sampleName}Factory.php")
         );
         $this->assertFileExists(
-            app_path('Http/Controllers/'.$this->sectionName."/routes/admin.php")
+            app_path('Http/Controllers/'.$this->sectionName.'/routes/admin.php')
         );
         $this->assertFileExists(
-            app_path('Http/Controllers/'.$this->sectionName."/routes/web.php")
+            app_path('Http/Controllers/'.$this->sectionName.'/routes/web.php')
         );
         $this->assertFileExists(
-            app_path('Http/Controllers/'.$this->sectionName."/routes/api.php")
+            app_path('Http/Controllers/'.$this->sectionName.'/routes/api.php')
         );
     }
 }
