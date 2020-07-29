@@ -167,7 +167,7 @@ class MakeSubsection extends Command
             'name'      => ucfirst($this->argument('name')).'Factory',
             '--section' => ucfirst($this->argument('parent')),
             '--model'   => $this->laravel->getNamespace().'Http\Controllers\\'.Str::studly($this->argument('parent')).
-                '\\Models\\'.Str::studly($this->argument('name'))
+                '\\Models\\'.Str::studly($this->argument('name')),
         ]);
     }
 }
