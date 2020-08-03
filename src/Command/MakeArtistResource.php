@@ -31,26 +31,27 @@ class MakeArtistResource extends Command
      */
     public function handle()
     {
-        $resourcePath = app_path('Http/Controllers/' . Str::studly($this->argument('section')) . '/' . Str::studly($this->argument('name')) . '.php');
+        $resourcePath = app_path('Http/Controllers/'.Str::studly($this->argument('section')).'/'.Str::studly($this->argument('name')).'.php');
 
         if (File::exists($resourcePath)) {
             $this->error('Resource already exists.');
+
             return false;
         }
 
-        if (!File::isDirectory(app_path('Http/Controllers/' . Str::studly($this->argument('section'))))) {
-            File::makeDirectory(app_path('Http/Controllers/' . Str::studly($this->argument('section'))), 0775, true);
+        if (! File::isDirectory(app_path('Http/Controllers/'.Str::studly($this->argument('section'))))) {
+            File::makeDirectory(app_path('Http/Controllers/'.Str::studly($this->argument('section'))), 0775, true);
         }
 
-        $data = File::get(__DIR__ . '/stubs/artist-resource.stub');
+        $data = File::get(__DIR__.'/stubs/artist-resource.stub');
         $data = str_replace(
             '{{{DummyNamespace}}}',
-            $this->laravel->getNamespace() . 'Http\\Controllers\\' . Str::studly($this->argument('section')),
+            $this->laravel->getNamespace().'Http\\Controllers\\'.Str::studly($this->argument('section')),
             $data
         );
         $data = str_replace(
             '{{{DummyFullModelClass}}}',
-            $this->laravel->getNamespace() . 'Http\\Controllers\\' . Str::studly($this->argument('section')) . '\\Models\\' . str_replace('Resource', '', Str::studly($this->argument('name'))),
+            $this->laravel->getNamespace().'Http\\Controllers\\'.Str::studly($this->argument('section')).'\\Models\\'.str_replace('Resource', '', Str::studly($this->argument('name'))),
             $data
         );
         $data = str_replace(
