@@ -1,0 +1,45 @@
+<?php
+
+namespace {{{DummyNamespace}}};
+
+use {{{DummyFullModelClass}}};
+use Illuminate\Validation\Rule;
+use Sedehi\Artist\Fields\Number;
+use Sedehi\Artist\Fields\Panel;
+use Sedehi\Artist\Fields\Text;
+use Sedehi\Artist\Resource;
+
+class {{{ClassName}}} extends Resource
+{
+    public static $model = {{{DummyModel}}}::class;
+    public static $perPage = 10;
+
+    public function fields()
+    {
+        return [
+            Text::make()
+                ->name('name')
+                ->htmlAttribute([
+                    'id' => 'name',
+                ])
+                ->label('Name :')
+                ->rules('required', 'min:3')
+                ->creationRules(Rule::unique('users','name'))
+                ->updateRules('unique:users,name,{{resourceId}}')
+                ->displayUsing(function ($model) {
+                    return strtolower($model->name);
+                }),
+
+            new Panel('Panel Title',[
+                Number::make()
+                    ->name('age')
+                    ->label('Age :')
+                    ->htmlAttribute([
+                        'min' => '5',
+                        'max' => '100',
+                    ])
+                    ->rules('required', 'integer'),
+            ]),
+        ];
+    }
+}
