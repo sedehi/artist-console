@@ -58,7 +58,7 @@ class MakeArtistResource extends Command implements SectionName
 
         $data = File::get(__DIR__.'/stubs/artist-resource.stub');
 
-        $namespace = str_replace('\\','',$this->laravel->getNamespace());
+        $namespace = str_replace('\\', '', $this->laravel->getNamespace());
         $fullModelClass = $this->laravel->getNamespace().str_replace('Resource', '', Str::studly($this->argument('name')));
 
         if ($this->option('section')) {
@@ -66,7 +66,7 @@ class MakeArtistResource extends Command implements SectionName
             $fullModelClass = $this->laravel->getNamespace().'Http\\Controllers\\'.Str::studly($this->option('section')).'\\Models\\'.str_replace('Resource', '', Str::studly($this->argument('name')));
         }
 
-        $data = str_replace('{{{DummyNamespace}}}',  $namespace, $data);
+        $data = str_replace('{{{DummyNamespace}}}', $namespace, $data);
         $data = str_replace('{{{DummyFullModelClass}}}', $fullModelClass, $data);
         $data = str_replace('{{{DummyModel}}}', str_replace('Resource', '', Str::studly($this->argument('name'))), $data);
         $data = str_replace('{{{ClassName}}}', Str::studly($this->argument('name')), $data);
