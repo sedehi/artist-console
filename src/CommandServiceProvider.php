@@ -3,6 +3,7 @@
 namespace Sedehi\Artist\Console;
 
 use Illuminate\Foundation\Providers\ArtisanServiceProvider;
+use Sedehi\Artist\Console\Command\InstallCommand;
 use Sedehi\Artist\Console\Command\MakeArtistResource;
 use Sedehi\Artist\Console\Command\MakeCast;
 use Sedehi\Artist\Console\Command\MakeChannel;
@@ -35,10 +36,11 @@ class CommandServiceProvider extends ArtisanServiceProvider
         $this->devCommands = array_merge(
             $this->devCommands,
             [
-                'SectionMake'      =>  MakeSection::class,
-                'SubsectionMake'   =>  MakeSubsection::class,
-                'ViewMake'         =>  MakeView::class,
-                'ArtistResourceMake'    =>  MakeArtistResource::class,
+                'SectionMake'        =>  MakeSection::class,
+                'SubsectionMake'     =>  MakeSubsection::class,
+                'ViewMake'           =>  MakeView::class,
+                'ArtistResourceMake' =>  MakeArtistResource::class,
+                'ArtistInstall'      =>  InstallCommand::class,
             ]
         );
 
@@ -205,6 +207,13 @@ class CommandServiceProvider extends ArtisanServiceProvider
     {
         $this->app->singleton('command.view.make', function ($app) {
             return new MakeView();
+        });
+    }
+
+    protected function registerArtistInstallCommand()
+    {
+        $this->app->singleton('command.install.artist', function ($app) {
+            return new InstallCommand();
         });
     }
 
