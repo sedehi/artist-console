@@ -37,6 +37,5 @@ class InstallCommand extends Command
         $this->callSilent('vendor:publish', ['--tag' => 'artist-lang']);
 
         $this->info('Artist scaffolding installed successfully.');
-
     }
 }
