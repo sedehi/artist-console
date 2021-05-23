@@ -42,7 +42,7 @@ class DummyClass extends Controller
 	    }
 	    $item->save();
 
-	    return redirect()->action('DummyAction@index')->with('success', trans('admin.saved'));
+	    return redirect()->artistRedirect()->with('success', trans('admin.saved'));
 
 	}
 
@@ -83,7 +83,7 @@ class DummyClass extends Controller
         }
         $item->save();
 
-        return redirect()->action('DummyAction@index')->with('success', trans('admin.saved'));
+        return redirect()->artistRedirect()->with('success', trans('admin.saved'));
 
     }
 
@@ -93,10 +93,9 @@ class DummyClass extends Controller
 
         foreach ($items as $item) {
             ImageMaker::make()->path(config('image.paths.DummySectionLower'))->name($item->picture)->remove();
+            $item->delete();
         }
 
-        $items->each->delete();
-
-        return redirect()->action('DummyAction@index')->with('success', trans('admin.deleted'));
+        return redirect()->artistRedirect()->with('success', trans('admin.deleted'));
     }
 }
