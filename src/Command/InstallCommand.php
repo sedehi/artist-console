@@ -2,9 +2,7 @@
 
 namespace Sedehi\Artist\Console\Command;
 
-use App\Http\Kernel;
 use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
