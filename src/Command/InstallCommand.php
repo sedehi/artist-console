@@ -47,7 +47,6 @@ class InstallCommand extends Command
         $password = $this->secret('What`s the admin password ? [default: 12345678]');
 
         $this->updateConfigFiles();
-        $this->registerAdminMiddleware();
 
         $this->publishRoleSection();
         $this->publishUserSection();
@@ -218,28 +217,6 @@ class InstallCommand extends Command
                 }
             }
             file_put_contents($viewConfigPath, $viewConfig);
-        }
-    }
-
-    private function registerAdminMiddleware()
-    {
-        $middlewareGroups = app()->make(Kernel::class)->getMiddlewareGroups();
-        $kernelPath = app_path('Http/Kernel.php');
-        $kernel = file_get_contents($kernelPath);
-        $eol = $this->EOL($kernel);
-
-        if (! Arr::has($middlewareGroups, 'admin')) {
-            $kernel = str_replace(
-                "'web' => [".$eol,
-                "'admin'  =>  [
-            'auth:admin',
-            \Sedehi\Artist\Http\Middleware\DefineGates::class,
-            \Sedehi\Artist\Http\Middleware\Permission::class,
-        ],".$eol."\t\t'web' => [".$eol,
-                $kernel
-            );
-
-            file_put_contents($kernelPath, $kernel);
         }
     }
 
