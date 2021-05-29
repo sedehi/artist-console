@@ -42,4 +42,24 @@ class {{{ClassName}}} extends Resource
             ]),
         ];
     }
+
+
+    public function menu()
+    {
+        return [
+            Menu::make()
+                ->title('menu')
+                ->permission('paint.paintcontroller.index')
+                ->url(action(HomeController::class)),
+            Menu::make()
+                ->title('menu 2')
+                ->permission('paint.paintcontroller.index')
+                ->url(action(HomeController::class))->childs([
+                    Menu::make()
+                        ->title('sub menu')
+                        ->permission('paint.paintcontroller.index')
+                        ->url(action(HomeController::class))
+                ])
+        ];
+    }
 }
