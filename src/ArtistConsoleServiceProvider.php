@@ -13,15 +13,11 @@ class ArtistConsoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'sedehi');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'sedehi');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
-
-        // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+
+
     }
 
     /**
@@ -35,7 +31,6 @@ class ArtistConsoleServiceProvider extends ServiceProvider
         if (class_exists(\Illuminate\Database\MigrationServiceProvider::class)) {
             $this->app->register(MigrationServiceProvider::class);
         }
-        //  $this->mergeConfigFrom(__DIR__.'/../config/artistconsole.php', 'artistconsole');
     }
 
     /**
@@ -45,27 +40,11 @@ class ArtistConsoleServiceProvider extends ServiceProvider
      */
     protected function bootForConsole()
     {
-        // Publishing the configuration file.
-//        $this->publishes([
-//            __DIR__.'/../config/artistconsole.php' => config_path('artistconsole.php'),
-//        ], 'artistconsole.config');
-
-        // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/sedehi'),
-        ], 'artistconsole.views');*/
-
-        // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/sedehi'),
-        ], 'artistconsole.views');*/
-
-        // Publishing the translation files.
-        /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/sedehi'),
-        ], 'artistconsole.views');*/
-
-        // Registering package commands.
-        // $this->commands([]);
+        $this->publishes([
+            __DIR__.'/../src/Console/stubs/sections/Role' => app_path('Http/Controllers/Role'),
+        ], 'section-role-directory');
+        $this->publishes([
+            __DIR__.'/../src/Console/stubs/sections/User' => app_path('Http/Controllers/User'),
+        ], 'section-user-directory');
     }
 }
