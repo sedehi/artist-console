@@ -43,7 +43,6 @@ class InstallCommand extends Command
         $this->registerMigrations();
         $this->registerRoutes();
 
-
         $email = $this->ask('What`s the admin email ?', 'admin@example.com');
         $password = $this->secret('What`s the admin password ? [default: 12345678]');
 
@@ -53,7 +52,6 @@ class InstallCommand extends Command
         $this->publishRoleSection();
         $this->publishUserSection();
 
-
         $this->call('migrate', [
             '--path' => [
                 'database/migrations',
@@ -62,18 +60,15 @@ class InstallCommand extends Command
             ],
         ]);
 
-
         $this->info('Artist scaffolding installed successfully.');
-
     }
-
 
     public function registerMigrations()
     {
         $appServiceProviderPath = app_path('Providers/AppServiceProvider.php');
         $appServiceProvider = file_get_contents($appServiceProviderPath);
         $eol = $this->EOL($appServiceProvider);
-        if (!Str::contains($appServiceProvider, 'loadMigration')) {
+        if (! Str::contains($appServiceProvider, 'loadMigration')) {
             $lines = file($appServiceProviderPath);
             $appServiceProvider = '';
             $linePointer = null;
@@ -109,7 +104,7 @@ class InstallCommand extends Command
 
     public function registerAdminRoutes()
     {
-        if (!File::exists(base_path('routes/admin.php'))) {
+        if (! File::exists(base_path('routes/admin.php'))) {
             file_put_contents(base_path('routes/admin.php'), file_get_contents(__DIR__.'/stubs/admin-routes.stub'));
         }
         $routeServiceProviderPath = app_path('Providers/RouteServiceProvider.php');
@@ -120,7 +115,7 @@ class InstallCommand extends Command
         $eol = $this->EOL($routeServiceProvider);
         file_put_contents($routeServiceProviderPath, str_replace('$this->mapWebRoutes();', '$this->mapWebRoutes();'.$eol."\t\t".'$this->mapAdminRoutes();', $routeServiceProvider));
         $routeServiceProvider = file_get_contents($routeServiceProviderPath);
-        if (!Str::contains(file_get_contents($routeServiceProviderPath), 'function mapAdminRoutes')) {
+        if (! Str::contains(file_get_contents($routeServiceProviderPath), 'function mapAdminRoutes')) {
             $routeServiceProvider = substr_replace($routeServiceProvider, $eol.$this->adminRouteCode(), strrpos($routeServiceProvider, '}') - 1, 0);
             file_put_contents($routeServiceProviderPath, $routeServiceProvider);
         }
@@ -181,13 +176,12 @@ class InstallCommand extends Command
         return array_keys($lineEndingCount, max($lineEndingCount))[0];
     }
 
-
     private function updateAppConfig()
     {
         $appConfigPath = config_path('app.php');
         $appConfig = file_get_contents($appConfigPath);
         $eol = $this->EOL($appConfig);
-        if (!Str::contains($appConfig, 'Morilog\Jalali\Jalalian::class')) {
+        if (! Str::contains($appConfig, 'Morilog\Jalali\Jalalian::class')) {
             $lines = file($appConfigPath);
             $appConfig = '';
             foreach ($lines as $lineNumber => $line) {
@@ -203,20 +197,18 @@ class InstallCommand extends Command
         }
     }
 
-
     private function updateConfigFiles()
     {
         $this->updateAppConfig();
         $this->updateViewConfig();
     }
 
-
     private function updateViewConfig()
     {
         $viewConfigPath = config_path('view.php');
         $viewConfig = file_get_contents($viewConfigPath);
         $eol = $this->EOL($viewConfig);
-        if (!Str::contains($viewConfig, 'app_path(\'Http/Controllers\')')) {
+        if (! Str::contains($viewConfig, 'app_path(\'Http/Controllers\')')) {
             $lines = file($viewConfigPath);
             $viewConfig = '';
             foreach ($lines as $lineNumber => $line) {
@@ -236,7 +228,7 @@ class InstallCommand extends Command
         $kernel = file_get_contents($kernelPath);
         $eol = $this->EOL($kernel);
 
-        if (!Arr::has($middlewareGroups, 'admin')) {
+        if (! Arr::has($middlewareGroups, 'admin')) {
             $kernel = str_replace(
                 "'web' => [".$eol,
                 "'admin'  =>  [
@@ -256,8 +248,8 @@ class InstallCommand extends Command
         $this->call('vendor:publish', ['--tag' =>  'section-user-directory']);
 
         // create user section language file
-        if (!File::exists(resource_path('lang/fa/user.php'))) {
-            if (!File::isDirectory(resource_path('lang/fa'))) {
+        if (! File::exists(resource_path('lang/fa/user.php'))) {
+            if (! File::isDirectory(resource_path('lang/fa'))) {
                 File::makeDirectory(resource_path('lang/fa'), 0755, true, true);
             }
             file_put_contents(
@@ -274,6 +266,4 @@ class InstallCommand extends Command
 
         return $this->call('vendor:publish', ['--tag' =>  'section-role-directory']);
     }
-
-
 }
