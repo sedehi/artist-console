@@ -233,8 +233,8 @@ class InstallCommand extends Command
                 "'web' => [".$eol,
                 "'admin'  =>  [
             'auth:admin',
-            \App\Http\Middleware\DefineGates::class,
-            \App\Http\Middleware\Permission::class,
+            \Sedehi\Artist\Http\Middleware\DefineGates::class,
+            \Sedehi\Artist\Http\Middleware\Permission::class,
         ],".$eol."\t\t'web' => [".$eol,
                 $kernel
             );
