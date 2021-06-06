@@ -4,8 +4,6 @@ namespace Sedehi\Artist\Console\Command;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Str;
 
 class InstallCommand extends Command
 {
