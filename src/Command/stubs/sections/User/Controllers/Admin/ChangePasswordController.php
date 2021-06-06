@@ -21,7 +21,7 @@ class ChangePasswordController extends Controller
                 'required',
                 'min:8',
                 function ($attribute, $value, $fail) {
-                    if (!Hash::check($value, auth('admin')->user()->password)) {
+                    if (! Hash::check($value, auth('admin')->user()->password)) {
                         $fail(trans('user.validation.wrong_current_password'));
                     }
                 },

@@ -43,8 +43,6 @@ class InstallCommand extends Command
         $email = $this->ask('What`s the admin email ?', 'admin@example.com');
         $password = $this->secret('What`s the admin password ? [default: 12345678]');
 
-
-
         $this->call('migrate', [
             '--path' => [
                 'database/migrations',
