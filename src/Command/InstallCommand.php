@@ -4,8 +4,6 @@ namespace Sedehi\Artist\Console\Command;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Str;
 
 class InstallCommand extends Command
 {
@@ -39,11 +37,13 @@ class InstallCommand extends Command
         $this->comment('Publishing Artist Translation...');
         $this->callSilent('vendor:publish', ['--tag' => 'artist-lang']);
 
+        $this->publishRoleSection();
+        $this->publishUserSection();
+
         $email = $this->ask('What`s the admin email ?', 'admin@example.com');
         $password = $this->secret('What`s the admin password ? [default: 12345678]');
 
-        $this->publishRoleSection();
-        $this->publishUserSection();
+
 
         $this->call('migrate', [
             '--path' => [

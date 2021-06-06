@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Http\Controllers\User\Requests\Admin;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class AdminRequest extends FormRequest
+{
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        switch ($this->route()->getActionMethod()) {
+            case 'destroy':
+                return [
+                    'deleteId' => 'required|array',
+                ];
+                break;
+            case 'store':
+                return [
+                    'first_name' => 'required|max:190',
+                    'last_name'  => 'required|max:190',
+                    'email'      => ['required', 'email', Rule::unique('admins')->whereNull('deleted_at'), 'max:150'],
+                    'password'   => 'required|min:6|max:150',
+                    'role'       => 'required|array|min:1',
+                ];
+                break;
+            case 'update':
+                return [
+                    'first_name' => 'required|max:190',
+                    'last_name'  => 'required|max:190',
+                    'email'      => [
+                        'required',
+                        'email',
+                        Rule::unique('admins')->ignore($this->route()->parameter('admin'))->whereNull('deleted_at'),
+                        'max:150',
+                    ],
+                    'password'   => 'nullable|min:6|max:150',
+                    'role'       => 'required|array|min:1',
+                ];
+                break;
+        }
+
+        return [];
+    }
+
+    public function messages()
+    {
+        return ['role.required' => trans('admin.validation.role.required')];
+    }
+}

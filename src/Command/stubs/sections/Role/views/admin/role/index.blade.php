@@ -1,0 +1,1 @@
+@extends('vendor.section.index')
