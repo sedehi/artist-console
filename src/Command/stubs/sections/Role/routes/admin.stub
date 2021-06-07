@@ -1,5 +1,5 @@
 <?php
 
-Route::group(['namespace' => 'Role\Controllers\Admin'], function () {
-    Route::resource('role', 'RoleController', ['except' => ['show']]);
-});
+use App\Http\Controllers\Role\Controllers\Admin\RoleController;
+
+Route::resource('role', RoleController::class)->except('show');

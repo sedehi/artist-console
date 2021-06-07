@@ -1,9 +1,9 @@
 <?php
 
-Route::group([
-    'namespace' => 'User\Controllers\Admin',
-], function () {
-    Route::get('profile/password', 'ChangePasswordController@index')->name('admin.password.index');
-    Route::post('profile/password', 'ChangePasswordController@change')->name('admin.password.change');
-    Route::resource('admins', 'AdminController');
-});
+use App\Http\Controllers\User\Controllers\Admin\AdminController;
+use App\Http\Controllers\User\Controllers\Admin\ChangePasswordController;
+
+
+Route::get('profile/password', [ChangePasswordController::class,'index'])->name('admin.password.index');
+Route::post('profile/password', [ChangePasswordController::class,'change'])->name('admin.password.change');
+Route::resource('admins', AdminController::class);
