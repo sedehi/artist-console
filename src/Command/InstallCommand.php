@@ -40,12 +40,20 @@ class InstallCommand extends Command
         $this->comment('Publishing Artist Translation...');
         $this->callSilent('vendor:publish', ['--tag' => 'artist-lang']);
 
+        $this->comment('Publishing Artist View...');
+        $this->callSilent('vendor:publish', ['--tag' => 'artist-views']);
+        $this->callSilent('vendor:publish', ['--tag' => 'laravel-pagination']);
+
         if (! File::exists(base_path('routes/artist.php'))) {
             File::put(base_path('routes/artist.php'), '<?php ');
         }
 
-        $this->publishRoleSection();
-        $this->publishUserSection();
+        if(!File::isDirectory(app_path('Http/Controllers/Role'))){
+            $this->publishRoleSection();
+        }
+        if(!File::isDirectory(app_path('Http/Controllers/User'))) {
+            $this->publishUserSection();
+        }
 
         $email = $this->ask('What`s the admin email ?', 'admin@example.com');
         $password = $this->secret('What`s the admin password ? [default: 12345678]');
