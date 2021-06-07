@@ -37,6 +37,10 @@ class InstallCommand extends Command
         $this->comment('Publishing Artist Translation...');
         $this->callSilent('vendor:publish', ['--tag' => 'artist-lang']);
 
+        if(!File::exists(base_path('routes/artist.php'))){
+            File::put(base_path('routes/artist.php'),'<?php ');
+        }
+
         $this->publishRoleSection();
         $this->publishUserSection();
 
