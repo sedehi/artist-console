@@ -38,11 +38,12 @@ class ArtistConsoleServiceProvider extends ServiceProvider
      */
     protected function bootForConsole()
     {
+
         $this->publishes([
-            __DIR__.'/../src/Console/stubs/sections/Role' => app_path('Http/Controllers/Role'),
+            __DIR__.'/../src/Command/stubs/sections/Role' => app_path('Http/Controllers/Role'),
         ], 'section-role-directory');
         $this->publishes([
-            __DIR__.'/../src/Console/stubs/sections/User' => app_path('Http/Controllers/User'),
+            __DIR__.'/../src/Command/stubs/sections/User' => app_path('Http/Controllers/User'),
         ], 'section-user-directory');
     }
 }
