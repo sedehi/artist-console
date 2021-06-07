@@ -48,10 +48,10 @@ class InstallCommand extends Command
             File::put(base_path('routes/artist.php'), '<?php ');
         }
 
-        if(!File::isDirectory(app_path('Http/Controllers/Role'))){
+        if (! File::isDirectory(app_path('Http/Controllers/Role'))) {
             $this->publishRoleSection();
         }
-        if(!File::isDirectory(app_path('Http/Controllers/User'))) {
+        if (! File::isDirectory(app_path('Http/Controllers/User'))) {
             $this->publishUserSection();
         }
 
