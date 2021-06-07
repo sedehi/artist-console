@@ -38,7 +38,6 @@ class ArtistConsoleServiceProvider extends ServiceProvider
      */
     protected function bootForConsole()
     {
-
         $this->publishes([
             __DIR__.'/../src/Command/stubs/sections/Role' => app_path('Http/Controllers/Role'),
         ], 'section-role-directory');

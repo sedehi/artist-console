@@ -71,7 +71,6 @@ class InstallCommand extends Command
             $admin->roles()->attach(Role::first());
 
             $this->info('Admin account created successfully.');
-
         }
 
         $this->info('Artist scaffolding installed successfully.');
@@ -83,7 +82,7 @@ class InstallCommand extends Command
 
         $files = $this->rglob(app_path('Http/Controllers/User/*.stub'));
         foreach ($files as $file) {
-            File::move($file,str_replace('.stub','.php',$file));
+            File::move($file, str_replace('.stub', '.php', $file));
         }
 
         // create user section language file
@@ -103,15 +102,17 @@ class InstallCommand extends Command
         $this->call('vendor:publish', ['--tag' =>  'section-role-directory']);
         $files = $this->rglob(app_path('Http/Controllers/Role/*.stub'));
         foreach ($files as $file) {
-            File::move($file,str_replace('.stub','.php',$file));
+            File::move($file, str_replace('.stub', '.php', $file));
         }
     }
 
-    private function rglob($pattern, $flags = 0) {
+    private function rglob($pattern, $flags = 0)
+    {
         $files = glob($pattern, $flags);
-        foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
+        foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
             $files = array_merge($files, $this->rglob($dir.'/'.basename($pattern), $flags));
         }
+
         return $files;
     }
 }
