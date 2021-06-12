@@ -6,6 +6,7 @@ use App\Http\Controllers\Role\database\seeds\RoleTableSeeder;
 use App\Http\Controllers\Role\Models\Role;
 use App\Http\Controllers\User\Models\Admin;
 use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 
 class InstallCommand extends Command
@@ -44,9 +45,12 @@ class InstallCommand extends Command
         $this->callSilent('vendor:publish', ['--tag' => 'artist-views']);
         $this->callSilent('vendor:publish', ['--tag' => 'laravel-pagination']);
 
+
         if (! File::exists(base_path('routes/artist.php'))) {
             File::put(base_path('routes/artist.php'), '<?php ');
         }
+
+        $this->updateAuthConfig();
 
         if(!File::isDirectory(app_path('Http/Controllers/Role'))){
             $this->publishRoleSection();
@@ -122,5 +126,49 @@ class InstallCommand extends Command
         }
 
         return $files;
+    }
+
+
+    private function updateAuthConfig()
+    {
+        $authConfigData = config('auth');
+        $authConfigPath = config_path('auth.php');
+        $authConfig = file_get_contents($authConfigPath);
+        $eol = $this->EOL($authConfig);
+
+        if (!Arr::has($authConfigData, 'guards.admin')) {
+            $authConfig = str_replace(
+                "'guards' => [".$eol,
+                "'guards' => [".$eol."\t\t'artist' => [
+            'driver' => 'session',
+            'provider' => 'artist',
+        ],".$eol,
+                $authConfig
+            );
+
+            file_put_contents($authConfigPath, $authConfig);
+        }
+
+        if (!Arr::has($authConfigData, 'providers.admins')) {
+            file_put_contents($authConfigPath, str_replace(
+                "'providers' => [".$eol,
+                "'providers' => [".$eol."\t\t'artist' => [
+            'driver' => 'eloquent',
+            'model' => \App\Http\Controllers\User\Models\Admin::class,
+        ],".$eol,
+                $authConfig
+            ));
+        }
+    }
+
+    protected function EOL(string $routeServiceProvider)
+    {
+        $lineEndingCount = [
+            "\r\n" => substr_count($routeServiceProvider, "\r\n"),
+            "\r"   => substr_count($routeServiceProvider, "\r"),
+            "\n"   => substr_count($routeServiceProvider, "\n"),
+        ];
+
+        return array_keys($lineEndingCount, max($lineEndingCount))[0];
     }
 }
