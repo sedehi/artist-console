@@ -45,17 +45,16 @@ class InstallCommand extends Command
         $this->callSilent('vendor:publish', ['--tag' => 'artist-views']);
         $this->callSilent('vendor:publish', ['--tag' => 'laravel-pagination']);
 
-
         if (! File::exists(base_path('routes/artist.php'))) {
             File::put(base_path('routes/artist.php'), '<?php ');
         }
 
         $this->updateAuthConfig();
 
-        if(!File::isDirectory(app_path('Http/Controllers/Role'))){
+        if (! File::isDirectory(app_path('Http/Controllers/Role'))) {
             $this->publishRoleSection();
         }
-        if(!File::isDirectory(app_path('Http/Controllers/User'))) {
+        if (! File::isDirectory(app_path('Http/Controllers/User'))) {
             $this->publishUserSection();
         }
 
@@ -128,7 +127,6 @@ class InstallCommand extends Command
         return $files;
     }
 
-
     private function updateAuthConfig()
     {
         $authConfigData = config('auth');
@@ -136,7 +134,7 @@ class InstallCommand extends Command
         $authConfig = file_get_contents($authConfigPath);
         $eol = $this->EOL($authConfig);
 
-        if (!Arr::has($authConfigData, 'guards.admin')) {
+        if (! Arr::has($authConfigData, 'guards.admin')) {
             $authConfig = str_replace(
                 "'guards' => [".$eol,
                 "'guards' => [".$eol."\t\t'artist' => [
@@ -149,7 +147,7 @@ class InstallCommand extends Command
             file_put_contents($authConfigPath, $authConfig);
         }
 
-        if (!Arr::has($authConfigData, 'providers.admins')) {
+        if (! Arr::has($authConfigData, 'providers.admins')) {
             file_put_contents($authConfigPath, str_replace(
                 "'providers' => [".$eol,
                 "'providers' => [".$eol."\t\t'artist' => [
