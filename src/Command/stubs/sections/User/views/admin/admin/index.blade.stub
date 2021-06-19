@@ -1,5 +1,4 @@
-@extends('vendor.section.index')
-
+@extends('artist::crud.index')
 @section('table_head')
     <th scope="col" class="w-50px">
         <div class="form-check">

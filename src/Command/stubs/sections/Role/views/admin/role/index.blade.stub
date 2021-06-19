@@ -1,1 +1,1 @@
-@extends('vendor.section.index')
+@extends('artist::crud.index')

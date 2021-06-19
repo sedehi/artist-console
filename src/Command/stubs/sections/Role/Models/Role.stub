@@ -16,12 +16,15 @@ class Role extends Model
 
     public static function allRoles()
     {
-        $list = glob(app_path('Http/Controllers/*/roles.php'));
-        $role = [];
-        foreach ($list as $dir) {
-            $role += include $dir;
+        $resources = glob(app_path('Http/Controllers/*/*Resource.php'));
+        $roles = [];
+        foreach ($resources as $resource) {
+            $resource = Str::remove('.php',$resource);
+            $resource = '\\'. Str::remove('\\',app()->getNamespace()).''.str_replace('/','\\', Str::after($resource,'app'));
+            $resource = new $resource;
+            $roles += $resource->roles();
         }
 
-        return $role;
+        return $roles;
     }
 }
