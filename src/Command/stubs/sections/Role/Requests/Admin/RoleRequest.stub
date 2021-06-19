@@ -17,7 +17,6 @@ class RoleRequest extends FormRequest
             case 'destroy':
                 return [
                     'deleteId'   => 'required|array',
-                    'deleteType' => 'required',
                 ];
                 break;
             case 'store':
