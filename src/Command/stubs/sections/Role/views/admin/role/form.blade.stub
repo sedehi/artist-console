@@ -1,18 +1,15 @@
 <div class="row">
     <x-artist::inputs.text :model="$item" name="title" />
-
     <div class="form-group col-md-5">
         <div class="form-check">
             <br>
             <label class="form-check-label">
                 <input id="select_all" class="form-check-input" type="checkbox" style="margin-right: -1.25rem">
-                @lang('admin.select_all')
+                @lang('artist::artist.select_all')
             </label>
         </div>
     </div>
 </div>
-
-
 
 <hr>
 
@@ -23,7 +20,7 @@
             <div class="row justify-content-end">
                 <div class="form-check">
                     <input name="select_part" class="form-check-input checkPart" type="checkbox" id="checkPart{{$section}}" data-part="{{$section}}">
-                    <label class="form-check-label" for="checkPart{{$section}}">@lang('admin.select_this_part')</label>
+                    <label class="form-check-label" for="checkPart{{$section}}">@lang('artist::artist.select_this_part')</label>
                 </div>
             </div>
         </div>
@@ -110,7 +107,7 @@
                            value="1"
                            @if ($onlyCheck) checked="checked" @endif
                     >
-                    <label for="{!! 'onlybyuser'.$section.strtolower($methods) !!}" class="d-inline">@lang('admin.modification_only_by_owner')</label>
+                    <label for="{!! 'onlybyuser'.$section.strtolower($methods) !!}" class="d-inline">@lang('artist::artist.modification_only_by_owner')</label>
                 </div>
             @endif
         </div>
@@ -118,7 +115,6 @@
     <hr>
 
 @endforeach
-
 
 @push('js')
     <script>
