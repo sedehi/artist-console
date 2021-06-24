@@ -14,7 +14,7 @@
         </div>
     </th>
     <th scope="col">@lang('validation.attributes.name')</th>
-    <th scope="col">@lang('admin.creation_date')</th>
+    <th scope="col">@lang('validation.attributes.creation_date')</th>
     <th scope="col" class="w-120px"></th>
 @endsection
 

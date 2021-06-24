@@ -30,7 +30,7 @@ class RoleController extends Controller
         $item->permission = serialize($request->get('access'));
         $item->save();
 
-        return redirect()->artistRedirect()->with('success', trans('admin.saved'));
+        return redirect()->artistRedirect()->with('success', trans('artist::artist.messages.saved'));
     }
 
     public function edit($id)
@@ -48,13 +48,13 @@ class RoleController extends Controller
         $item->permission = serialize($request->get('access'));
         $item->save();
 
-        return redirect()->artistRedirect()->with('success', trans('admin.saved'));
+        return redirect()->artistRedirect()->with('success', trans('artist::artist.messages.updated'));
     }
 
     public function destroy(RoleRequest $request)
     {
         Role::whereIn('id', $request->get('deleteId'))->get()->each->delete();
 
-        return redirect()->artistRedirect()->with('success', trans('admin.deleted'));
+        return redirect()->artistRedirect()->with('success', trans('artist::artist.messages.deleted'));
     }
 }

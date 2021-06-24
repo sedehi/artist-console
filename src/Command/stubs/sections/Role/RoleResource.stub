@@ -12,7 +12,7 @@ class RoleResource extends Resource
     {
         return [
             Menu::make()
-                ->title(__('admin.admins_groups'))
+                ->title(trans('artist::artist.management_group'))
                 ->permission('role.rolecontroller.index')
                 ->url(action([RoleController::class,'index'])),
         ];
@@ -20,16 +20,15 @@ class RoleResource extends Resource
 
     public function roles()
     {
-
         return [
             'role' => [
-                'title'  => trans('admin.admins_groups'),
+                'title'  => trans('artist::artist.management_group'),
                 'access' => [
                     'RoleController' => [
-                        trans('admin.list')   => 'index',
-                        trans('admin.create') => ['create', 'store'],
-                        trans('admin.edit')   => ['edit', 'update'],
-                        trans('admin.delete') => 'destroy',
+                        trans('artist::artist.list')   => 'index',
+                        trans('artist::artist.create') => ['create', 'store'],
+                        trans('artist::artist.edit')   => ['edit', 'update'],
+                        trans('artist::artist.delete') => 'destroy',
                     ],
                 ],
             ],

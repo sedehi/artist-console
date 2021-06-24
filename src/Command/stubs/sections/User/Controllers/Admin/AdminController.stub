@@ -33,12 +33,11 @@ class AdminController extends Controller
             'first_name' => $request->get('first_name'),
             'last_name'  => $request->get('last_name'),
             'email'      => $request->get('email'),
-            'mobile'     => $request->get('mobile'),
             'password'   => bcrypt($request->get('password')),
         ]);
         $item->roles()->attach($request->get('role'));
 
-        return redirect()->artistRedirect()->with('success', trans('admin.saved'));
+        return redirect()->artistRedirect()->with('success', trans('artist::artist.messages.saved'));
     }
 
     public function edit($id)
@@ -57,7 +56,6 @@ class AdminController extends Controller
             'first_name' => $request->get('first_name'),
             'last_name'  => $request->get('last_name'),
             'email'      => $request->get('email'),
-            'mobile'     => $request->get('mobile'),
         ]);
         if ($request->filled('password')) {
             $item->password = bcrypt($request->get('password'));
@@ -65,14 +63,14 @@ class AdminController extends Controller
         $item->save();
         $item->roles()->sync($request->get('role'));
 
-        return redirect()->artistRedirect()->with('success', trans('admin.saved'));
+        return redirect()->artistRedirect()->with('success', trans('artist::artist.messages.updated'));
     }
 
     public function destroy(AdminRequest $request)
     {
         Admin::whereIn('id', $request->get('deleteId'))->get()->each->delete();
 
-        return redirect()->artistRedirect()->with('success', trans('admin.deleted'));
+        return redirect()->artistRedirect()->with('success', trans('artist::artist.messages.deleted'));
     }
 
     protected function roles()

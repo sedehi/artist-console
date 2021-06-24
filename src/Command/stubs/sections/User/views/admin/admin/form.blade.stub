@@ -4,7 +4,7 @@
     <x-artist::inputs.text :model="$item ?? null" name="password" type="password" />
     <x-artist::inputs.text :model="$item ?? null" name="email" />
     <div class="col-md-12 row">
-        <h6 class="mb-3">@lang('admin.admins_groups')</h6>
+        <h6 class="mb-3">@lang('artist::artist.management_group')</h6>
         <div class="col-md-12 row mb-5">
             @foreach($roles as $role)
                 <div class="form-check col-md-3 mb-2 mt-2">
