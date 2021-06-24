@@ -13,8 +13,8 @@
             <input class="form-check-input position-static check-all" type="checkbox">
         </div>
     </th>
-    <th scope="col">@lang('artist::attributes.name')</th>
-    <th scope="col">@lang('artist::attributes.creation_date')</th>
+    <th scope="col">@lang('validation.attributes.name')</th>
+    <th scope="col">@lang('validation.attributes.creation_date')</th>
     <th scope="col" class="w-120px"></th>
 @endsection
 

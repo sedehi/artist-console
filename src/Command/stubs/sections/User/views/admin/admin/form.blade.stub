@@ -1,8 +1,8 @@
 <div class="row">
-    <x-artist::inputs.text :model="$item ?? null" name="first_name" title="{!! trans('artist::attributes.first_name') !!}" />
-    <x-artist::inputs.text :model="$item ?? null" name="last_name" title="{!! trans('artist::attributes.last_name') !!}" />
-    <x-artist::inputs.text :model="$item ?? null" name="password" type="password" title="{!! trans('artist::attributes.password') !!}" />
-    <x-artist::inputs.text :model="$item ?? null" name="email" title="{!! trans('artist::attributes.email') !!}" />
+    <x-artist::inputs.text :model="$item ?? null" name="first_name" title="{!! trans('validation.attributes.first_name') !!}" />
+    <x-artist::inputs.text :model="$item ?? null" name="last_name" title="{!! trans('validation.attributes.last_name') !!}" />
+    <x-artist::inputs.text :model="$item ?? null" name="password" type="password" title="{!! trans('validation.attributes.password') !!}" />
+    <x-artist::inputs.text :model="$item ?? null" name="email" title="{!! trans('validation.attributes.email') !!}" />
     <div class="col-md-12 row">
         <h6 class="mb-3">@lang('artist::artist.management_group')</h6>
         <div class="col-md-12 row mb-5">
