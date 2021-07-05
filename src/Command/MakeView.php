@@ -29,7 +29,7 @@ class MakeView extends Command
     public function handle()
     {
         $viewPath = 'views/admin/'.strtolower($this->argument('name')).'/';
-        if (!File::isDirectory(app_path('Http/Controllers/'.ucfirst($this->argument('section')).'/'.$viewPath))) {
+        if (! File::isDirectory(app_path('Http/Controllers/'.ucfirst($this->argument('section')).'/'.$viewPath))) {
             File::makeDirectory(app_path('Http/Controllers/'.ucfirst($this->argument('section')).'/'.$viewPath), 0775, true);
         }
         $stubFolder = 'dynamic';
