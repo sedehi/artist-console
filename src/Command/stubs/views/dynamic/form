@@ -1,0 +1,3 @@
+<div class="row">
+    <x-artist::inputs.text :model="$item" name="title" />
+</div>
