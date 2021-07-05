@@ -14,12 +14,12 @@ class DummyClass extends Controller
     {
         $items = DummyModelClass::latest('id')->paginate(10);
 
-        return view('vendor.section.index', compact('items'));
+        return view('vendor.artist.crud.index', compact('items'));
     }
 
     public function create()
     {
-        return view('vendor.section.create');
+        return view('vendor.artist.crud.create');
     }
 
     public function store(DummyRequestClass $request)
@@ -36,7 +36,7 @@ class DummyClass extends Controller
     {
         $item = DummyModelClass::findOrFail($id);
 
-        return view('vendor.section.edit', compact('item'));
+        return view('vendor.artist.crud.edit', compact('item'));
     }
 
     public function show($id)
