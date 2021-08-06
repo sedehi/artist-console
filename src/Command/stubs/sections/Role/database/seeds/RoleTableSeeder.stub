@@ -23,6 +23,7 @@ class RoleTableSeeder extends Seeder
     public function rolePermissions()
     {
         $data = ['filemanager' => 1];
+        $finalMethod = null;
         foreach (Role::allRoles() as $section => $role) {
             foreach ($role['access'] as $controller => $methods) {
                 foreach ($methods as $method) {
