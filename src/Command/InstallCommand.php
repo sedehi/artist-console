@@ -130,6 +130,9 @@ class InstallCommand extends Command
     private function updateAuthConfig()
     {
         $authConfigData = config('auth');
+        if(isset($authConfigData['guards']['artist'])){
+            return;
+        }
         $authConfigPath = config_path('auth.php');
         $authConfig = file_get_contents($authConfigPath);
         $eol = $this->EOL($authConfig);
