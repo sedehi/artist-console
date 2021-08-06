@@ -20,7 +20,7 @@ class DummyClass extends Controller
 
 	public function create()
 	{
-	   return view('vendor.artist.crud.create');
+        return view('artist::crud.create');
 	}
 
 	public function store(DummyRequestClass $request)

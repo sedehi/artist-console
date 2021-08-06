@@ -14,12 +14,12 @@ class DummyClass extends Controller
     {
         $items = DummyModelClass::latest('id')->paginate(10);
 
-        return view('vendor.artist.crud.index', compact('items'));
+        return view('DummyViewPath.index', compact('items'));
     }
 
     public function create()
     {
-        return view('vendor.artist.crud.create');
+        return view('artist::crud.create');
     }
 
     public function store(DummyRequestClass $request)
