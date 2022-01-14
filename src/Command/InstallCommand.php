@@ -46,9 +46,11 @@ class InstallCommand extends Command
         $this->callSilent('vendor:publish', ['--tag' => 'laravel-pagination']);
 
         if (! File::exists(base_path('routes/artist.php'))) {
-            File::put(base_path('routes/artist.php'), "use Sedehi\Artist\Http\Controllers\HomeController;
+            File::put(base_path('routes/artist.php'), "<?php
+use Sedehi\Artist\Http\Controllers\HomeController;
 
-Route::get('/', HomeController::class)->name('artist.home');");
+Route::get('/', HomeController::class)->name('artist.home');
+");
         }
 
         $this->updateAuthConfig();
